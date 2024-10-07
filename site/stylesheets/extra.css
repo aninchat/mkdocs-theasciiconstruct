@@ -47,3 +47,13 @@
 .md-typeset img {
     max-width: 85%
 }
+
+/* control code block coloring 
+
+:root > * {
+    --md-code-fg-color--dark: #FFFFFF
+}
+
+not working right now 
+
+*/

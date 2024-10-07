@@ -74,8 +74,10 @@ nav:
   - Home: index.md
   - Blog:
      - blog/index.md
-  - "Learning References":
+  - "Learning references":
       - references/index.md
+  - "Learning labs":
+      - labs/index.md
 markdown_extensions:
   - attr_list
   - admonition

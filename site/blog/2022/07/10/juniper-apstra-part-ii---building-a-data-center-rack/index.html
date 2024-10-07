@@ -1,0 +1,1529 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://www.theasciiconstruct.com/blog/2022/07/10/juniper-apstra-part-ii---building-a-data-center-rack/">
+      
+      
+        <link rel="prev" href="../../../06/30/juniper-apstra-part-i---introducing-a-true-ibns/">
+      
+      
+        <link rel="next" href="../../../12/18/ciscos-nxos-evpn-hybrid-mode---interoperability-with-asymmetric-vteps/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Juniper Apstra Part II - Building a data center rack - The ASCII Construct</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne+Mono:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Syne Mono";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-KE4X74VVDE"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-KE4X74VVDE",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-KE4X74VVDE",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#juniper-apstra-part-ii-building-a-data-center-rack" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+    Buy my latest book 
+    <a style="color:White" href="https://www.pearson.com/en-us/subject-catalog/p/deploying-juniper-data-centers-with-evpn-vxlan/P200000011537/9780138225377">
+        <em><b>Deploying Juniper Data Centers with EVPN VXLAN</b></em>!
+    </a>
+  
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="The ASCII Construct" class="md-header__button md-logo" aria-label="The ASCII Construct" data-md-component="logo">
+      
+  <img src="../../../../../assets/dbc_3334.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The ASCII Construct
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Juniper Apstra Part II - Building a data center rack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aninchat/mkdocs-theasciiconstruct" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aninchat/mkdocs-theasciiconstruct
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../references/" class="md-tabs__link">
+          
+  
+    
+  
+  Learning References
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="The ASCII Construct" class="md-nav__button md-logo" aria-label="The ASCII Construct" data-md-component="logo">
+      
+  <img src="../../../../../assets/dbc_3334.png" alt="logo">
+
+    </a>
+    The ASCII Construct
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aninchat/mkdocs-theasciiconstruct" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aninchat/mkdocs-theasciiconstruct
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    December 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    December 2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/apstra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    apstra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/arista/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    arista
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/bgp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bgp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cisco/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/containerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    containerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cumulus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cumulus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/evpn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    evpn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/juniper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/junos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    junos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/lisp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lisp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/mlag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mlag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/multivendor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multivendor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/nxos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nxos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/sda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    sda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/vxlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../references/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Learning References
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Learning References
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/dbc_3334.png" alt="Aninda Chatterjee">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Aninda Chatterjee
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2022-07-10 00:00:00" class="md-ellipsis">July 10, 2022</time>
+                      </div>
+                    </li>
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"/></svg>
+                          <time datetime="2022-07-10 00:00:00" class="md-ellipsis">July 10, 2022</time>
+                        </div>
+                      </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/juniper/">juniper</a>, 
+                              <a href="../../../../category/apstra/">apstra</a>, 
+                              <a href="../../../../category/evpn/">evpn</a>, 
+                              <a href="../../../../category/vxlan/">vxlan</a>, 
+                              <a href="../../../../category/bgp/">bgp</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              14 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topology
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#designing-a-data-center-rack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Designing a data center rack
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Designing a data center rack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agents-and-agent-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agents and Agent Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical Devices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Device Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Maps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#putting-it-all-together-to-build-a-rack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it all together to build a rack
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">juniper</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">apstra</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">evpn</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">vxlan</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">bgp</span>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="juniper-apstra-part-ii-building-a-data-center-rack">Juniper Apstra Part II - Building a data center rack</h1>
+<p>In this post, we'll start designing the building blocks for our data center deployment with Juniper Apstra. We'll look at how to design a rack.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Designing a rack is a fairly involved process. To be completely thorough, we're going to define new logical devices, create interface maps for these and then put it all together to build a rack. Naturally, some of these terms (logical devices, interface maps and so on) are Apstra specific - not to worry, we'll break it all down and understand what these are and how they are used. </p>
+<p>Before we dive into this, I'd like to talk about why Apstra does things this way and what the methodology is. Why build these abstracted models? Why racks? </p>
+<p>When you're building out a data center (physically), you'd know that there are a lot of things that simply repeat. Racks are usually identical - or at best you have a few types of racks servicing specific things, and those types of racks repeat. This can include how many leafs per rack, the redundancy model is usually common across the organization, how many servers and so on. You're typically buying identical physical racks as well (like a 42RU rack) and so on. </p>
+<!-- more -->
+
+<p>This repeatability also drives consistency - the more "unique" data points you add in your network, the more complex it becomes. And complexity means more potential outages, slower time to resolution when issues do arise. Simple is good. </p>
+<p>Apstra just took these repeatable units and made logical, abstracted models of these. It's a simple, natural extension of how your physical data center would look, which makes it so easy to work with, and understand what Apstra is doing and why.</p>
+<h2 id="topology">Topology</h2>
+<p>Our topology is the same one we used for <a href="https://www.theasciiconstruct.com/post/juniper-apstra-part1/">Part I</a> of this series. We're going to be focusing on just the vQFX devices and leave out the Arista vEOS and Cisco N9Kv for now (multivendor via Apstra will be a later post).</p>
+<p><img alt="topo1" src="/static/images/juniper/juniper_apstra_2/juniper-apstra-part2-topo-1.jpg" /></p>
+<h2 id="designing-a-data-center-rack">Designing a data center rack</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our reference for this entire process is based on Apstra 4.1.0.</p>
+</div>
+<p>Let's go back to the workflow we'd described in the first post:</p>
+<p><img alt="workflow1" src="/static/images/juniper/juniper_apstra_2/onboard_and_build_rack_workflow.jpg" /></p>
+<p>This is what we're going to detail out here, and understand various components involved in building a rack. </p>
+<h3 id="agents-and-agent-profiles">Agents and Agent Profiles</h3>
+<p>To take action on any device (or collect data from any device), the device must first be known to the system (Apstra, in this case) - it must be a part of the inventory. In Apstra, this is facilitated by something called as 'Agents'. </p>
+<p>Agents can be of two types:</p>
+<ol>
+<li>On-box - these are agents that are installed directly on the network device itself (applicable only if supported by the network operating system).</li>
+<li>Off-box - these are agents installed on the Apstra server, as a container, for a particular network device. </li>
+</ol>
+<p>A complete compatibility list (what network operating system supports what type of agent) is available in the official Apstra documentation, found <a href="https://www.juniper.net/documentation/product/us/en/apstra">here</a>. Navigate to the 'User Guide'. </p>
+<p>Juniper supports only the off-box agent as of Apstra 4.1.0, and detailed instructions regarding the initial configuration required for the off-box agent to be installed can be found <a href="https://www.juniper.net/documentation/us/en/software/apstra4.1/apstra-user-guide/topics/task/agent-off-box-create.html">here</a> for Apstra 4.1. </p>
+<p>If you don't want to read the guide, here's a quick summary: a super-user that Apstra will use to login to the system, ssh and netconf over ssh, and finally reachability to the network device from Apstra.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{master:0}[edit]
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>root@vqfx# show system login 
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>user aninchat {
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    uid 2000;
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    class super-user;
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    authentication {
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        encrypted-password &quot;$6$CR8rOdvC$fZiYRGtALKZNGU1hWCyoNg5fqxqyJlANacEwEfRPHLawUWzzpMLdMw1NpR5Z3//hPckVZbTjYFkCHPBdaKzxo.&quot;; ## SECRET-DATA
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    }
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>}
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>{master:0}[edit]
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>root@vqfx# show system services 
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>ssh {
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    root-login allow;
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>}
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>netconf {
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    ssh;
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>}
+</span></code></pre></div>
+<p>As part of the device discovery, some basic parameters are needed, which are a part of constructing the Agent itself - this includes the platform (junos/eos/nxos), the IP address to reach the device and the username/password for logging into the device. </p>
+<p><img alt="offbox1" src="/static/images/juniper/juniper_apstra_2/offbox_agent_parameters.jpg" /></p>
+<p>As you can imagine, this can get pretty tedious if you have to choose the platform and type in the username/password every single time for every new device that needs to be onboarded. This is where <strong>Agent Profiles</strong> are useful - you can create a profile for a specific type of device and just use the profile whenever that type of network device needs to be onboarded.</p>
+<p>As an example, let's create an Agent Profile for my vQFX devices that need to be onboarded:</p>
+<p><img alt="offbox2" src="/static/images/juniper/juniper_apstra_2/offbox_agent_profile_vqfx.jpg" /></p>
+<p>You can see that I also have similar profiles created for Arista vEOS and Cisco N9Kv:</p>
+<p><img alt="offbox3" src="/static/images/juniper/juniper_apstra_2/offbox_agent_profile_others.jpg" /></p>
+<p>Now, I can type in the IP addresses of the devices I want to onboard (my two vQFX spines, and three vQFX leafs, in this case) and choose the vQFX profile.</p>
+<p><img alt="onboardvqfx" src="/static/images/juniper/juniper_apstra_2/onboarding_vqfx.jpg" /></p>
+<p>These devices are now listed under 'Managed Devices' under the main 'Devices' tab. While Apstra makes contact with the devices that need to be onboarded, and collect data that it needs to onboard it, you can view the logs for any device that is being onboarded (or was onboarded already). </p>
+<p>Just click on the button with the three dots (extreme right of each device row), and you get a set of actions available to you for that particular device. One of these actions is 'Show Log'.</p>
+<p><img alt="showlog1" src="/static/images/juniper/juniper_apstra_2/show_log_option.jpg" /></p>
+<p>The logs from a successful onboard of a vQFX device looks something like this:</p>
+<p><img alt="showlog2" src="/static/images/juniper/juniper_apstra_2/logs_vqfx_onboarding.jpg" /></p>
+<p>As part of the process, Apstra collects the configuration from the device and stores it as the pristine configuration - this is the baseline configuration without any services and features added to the device, apart from what was needed to get the device onboarded into Apstra. The Apstra state for the device at this point is called 'OOS-QUARANTINED' where 'OOS' stands for 'Out Of Service'.</p>
+<p>The entire device lifecycle can be found <a href="https://www.juniper.net/documentation/us/en/software/apstra4.1/apstra-user-guide/topics/topic-map/device-config-lifecycle.html">here</a>. Once a device is onboarded, it needs to be explicitly acknowledged by Apstra - this acknowledgment kicks off the 'Discovery 1' process where LLDP is enabled on all interfaces. You can acknowledge a device by selecting the device (or selecting a subset of devices) and clicking on the 'acknowledge selected systems' button, and a subsequent confirmation:</p>
+<p><img alt="ack" src="/static/images/juniper/juniper_apstra_2/ack_devices.jpg" /></p>
+<p><img alt="confirmack" src="/static/images/juniper/juniper_apstra_2/confirm_ack.jpg" /></p>
+<p>At this point, connected devices should see each other as LLDP neighbors. The Apstra state for the device moves from 'OOS-QUARANTINED' to 'OOS-READY' which essentially implies that the device is out of service, but it is ready and can now be added into a blueprint.</p>
+<h3 id="logical-devices">Logical Devices</h3>
+<p>Logical Devices, as the name suggests, are just a logical or abstracted representation of your network device. The important thing to remember is that this is not vendor specific at all - you're not choosing Cisco or Arista or Juniper with a logical device. You're simply stating that you'd like a device that has, for example, 24x10G ports, with 4x100G uplinks. Or whatever other speed/port combination you're looking for.</p>
+<p>A logical device also allows you to specify what kind of devices these ports can be connected to and used for - again, for example, you'd like your 4x100G uplinks to be used for connections to a spine, and your 24x10G ports as connections to servers.</p>
+<p>Logical devices can be found under 'Design'. There are numerous logical devices that are already pre-built, covering a large range of existing (and supported) network devices from different vendors such as Cisco, Arista and Juniper. </p>
+<p><img alt="logical_device_main" src="/static/images/juniper/juniper_apstra_2/logical_device_main_page.jpg" /></p>
+<p>We're going to create two new logical devices to go through the workflow: one for a vQFX leaf, and another for a vQFX spine. We're also going to be specific with what ports can connect to what network devices.</p>
+<p>We're going to have 6 ports available on the leaf (10G each) to connect to spines:</p>
+<p><img alt="vqfx_leaf_ld1" src="/static/images/juniper/juniper_apstra_2/vqfx_leaf_ld1.jpg" /></p>
+<p>Click on the 'Create Port Group' option to create a port group for these 6x10G ports. </p>
+<p><img alt="vqfx_leaf_ld2" src="/static/images/juniper/juniper_apstra_2/vqfx_leaf_ld2.jpg" /></p>
+<p>You can continue to add more ports by dragging the port group further. We're going to add another 6 ports that can be used to connect to the hosts. Hosts can be selected as 'Generic':</p>
+<p><img alt="vqfx_leaf_ld3" src="/static/images/juniper/juniper_apstra_2/vqfx_leaf_ld3.jpg" /></p>
+<p>You should now have a 12x10G vQFX logical device:</p>
+<p><img alt="vqfx_leaf_ld4" src="/static/images/juniper/juniper_apstra_2/vqfx_leaf_ld4.jpg" /></p>
+<p>Click on 'Create' to create this logical device. We're going to do the same thing for our vQFX spines, but all ports are going to be marked as connected to leafs.</p>
+<p><img alt="vqfx_spine_ld1" src="/static/images/juniper/juniper_apstra_2/vqfx_spine_ld1.jpg" /></p>
+<p>Create the port group, and click on create just like before to build this vQFX spine logical device:</p>
+<p><img alt="vqfx_spine_ld2" src="/static/images/juniper/juniper_apstra_2/vqfx_spine_ld2.jpg" /></p>
+<h3 id="device-profiles">Device Profiles</h3>
+<p>Device Profiles are where the actual hardware is defined. This includes (among other things): </p>
+<ul>
+<li>what kind of vendor specific model the hardware is (PID) </li>
+<li>the network operating system </li>
+<li>what versions to match on (based on a regular expression) </li>
+<li>CPU and RAM on the device </li>
+<li>the kind of ASIC it supports</li>
+<li>CoPP support</li>
+<li>interfaces, the kind of connector type for it, and the naming convention</li>
+</ul>
+<p>For vQFX (as well as vEOS and N9Kv), a device profile already exists, so we're not going to create a new one. But I'd still like to walk you through some of these options to show you how it can be done, particularly how the ports are defined via "transformations".</p>
+<p>Device Profiles can be found under 'Devices'. The main page for this lists out all of the available device profiles, with a search bar to filter as you wish.</p>
+<p><img alt="device_profile_main" src="/static/images/juniper/juniper_apstra_2/device_profile_main.jpg" /></p>
+<p>If you'd like to create a new profile, you're met with the following page and options:</p>
+<p><img alt="new_device_profile1" src="/static/images/juniper/juniper_apstra_2/new_device_profile1.jpg" /></p>
+<p>The selector option lets you specific more vendor specific information:</p>
+<p><img alt="new_device_profile2" src="/static/images/juniper/juniper_apstra_2/new_device_profile2.jpg" /></p>
+<p>I want to focus on the 'Ports' section for a little bit, as that is very interesting. Here, you're greeted with a famiilar looking UI (this is similar to how we created logical devices). By default, one panel is present which is what you'd have for a non-modular network device. Considering our vQFX example, this panel should have 12 ports:</p>
+<p><img alt="new_device_profile3" src="/static/images/juniper/juniper_apstra_2/new_device_profile3.jpg" /></p>
+<p>You can now select a port, a subset of ports or all the ports to associate properties against them, like the connector type (SFP, QSFP and so on). For example, I have selected port 1 (by simply clicking on it):</p>
+<p><img alt="new_device_profile4" src="/static/images/juniper/juniper_apstra_2/new_device_profile4.jpg" /></p>
+<p>You also need to associate a "transformation" against the port. This is how the interface naming is actually generated (which, as you can imagine, can be vastly different from vendor to vendor), as well as the speed of the interface. Clicking on 'Add new transformation' lets you do this. </p>
+<p><img alt="new_device_profile5" src="/static/images/juniper/juniper_apstra_2/new_device_profile5.jpg" /></p>
+<p>Before we move on from this, I'd like to show you the pre-built vQFX device profile:</p>
+<p><img alt="vqfx_device_profile" src="/static/images/juniper/juniper_apstra_2/vqfx_device_profile.jpg" /></p>
+<p>These are 12x10G ports, with the transformation defining the interface naming as xe-0/0/0 for port 1 and so on, which is what we expect. </p>
+<p>The transformations do more than just this - these are extremely crucial for defining breakouts as well. You can simply have multiple transformations defined which allows you to create port breakouts - for example, let's say the actual vendor hardware you buy allows for a 40G port to be split into 4x10G ports. How would you deal with this in Apstra? You would simply create two transformations - one for the 4x10G ports and another for the 1x40G port.</p>
+<h3 id="interface-maps">Interface Maps</h3>
+<p>Interface Maps are fairly straightforward, but extremely important. A logical device and a device profile feed into it, and are used to create an interface map. This is where your logical abstraction of a device, and it's hardware specific information all comes together to form an actual deployable network device in your blueprint (which we'll talk about in the next post).</p>
+<p>From the UI, this is found under 'Design' again. Like I said, an interface map just takes in two feeds - a logical device, and a device profile.</p>
+<p><img alt="interface_map1" src="/static/images/juniper/juniper_apstra_2/interface_map1.jpg" /></p>
+<p>For our case, we're going to create two interface maps - one for the vQFX leaf and another for the vQFX spine. Starting with the leaf, we have our leaf logical device and the vQFX device profile as the input. Once this is done, there is some additional selection that needed - this is the port selection for the port groups that were created within the logical device:</p>
+<p><img alt="interface_map2" src="/static/images/juniper/juniper_apstra_2/interface_map2.jpg" /></p>
+<p>The 'Select Interface' is kind of a drop down, which when clicked, lists all the available ports that can be selected (and mapped using the device profile) for that port group.</p>
+<p><img alt="interface_map3" src="/static/images/juniper/juniper_apstra_2/interface_map3.jpg" /></p>
+<p>This can be a little confusing, since it might seem like we did this exercise while creating a logical device as well, but think of it as this way - with the logical device, you're only defining the number of ports, their speeds, and what they are allowed to be connected to. In the interface map (and using the device profile), you're actually selecting which ports can do what and mapping them to a vendors standard naming convention (using a transformation that was defined in the device profile) for that kind of port.</p>
+<p><img alt="interface_map_workflow" src="/static/images/juniper/juniper_apstra_2/interface_map_workflow.jpg" /></p>
+<p>So, in our case, I'd like the first 6 ports to be available as my spine connections, and use transformation #1 which was the default transformation present in the pre-built vQFX device profile. Let's select those:</p>
+<p><img alt="interface_map4" src="/static/images/juniper/juniper_apstra_2/interface_map4.jpg" /></p>
+<p>The remaining 6 ports are now chosen for my host/server connections:</p>
+<p><img alt="interface_map5" src="/static/images/juniper/juniper_apstra_2/interface_map5.jpg" /></p>
+<p>Finally, as a confirmation, if you scroll down a bit during the interface map creation, you can select any port to see a summary of what it would look like when actually deployed. I've selected port 1, which tells me it is port #1 of panel #1, and it is named xe-0/0/0.</p>
+<p><img alt="interface_map6" src="/static/images/juniper/juniper_apstra_2/interface_map6.jpg" /></p>
+<p>For our spine interface map, a similar process can be followed. In this case, there is just one port group with all 12 ports, and we select all of them with the same default transformation #1 from the pre-built vQFX device profile.</p>
+<p><img alt="interface_map7" src="/static/images/juniper/juniper_apstra_2/interface_map7.jpg" /></p>
+<h3 id="putting-it-all-together-to-build-a-rack">Putting it all together to build a rack</h3>
+<p>Well, we're finally here. We've got all our building blocks setup, and it's time to actually build a data center rack. </p>
+<p>Racks are found under 'Design' and like everything else, there are several pre-built racks for you. To demonstrate how it's done, we're going to build a rack from scratch. Our goal is to build a rack that has one vQFX leaf and two hosts attached to it. It is minimal, and a little unrealistic, but the aim is to largely show you how these different pieces fit together and what the workflow looks like for this.</p>
+<p>We're going to give our rack a name - '1L vQFX12x10G', which makes it easy for me to understand that this is a one leaf rack, where the leaf is a vQFX with 12x10G ports. We want to build a 3-stage Clos fabric, so we're going to choose the 'L3 Clos' option. Alternatively, you can choose the 'L3 Collapsed' design, where there are no spines.</p>
+<p><img alt="vqfx_rack1" src="/static/images/juniper/juniper_apstra_2/vqfx_rack1.jpg" /></p>
+<p>Now we can move into the configuration of the rack - this is where you define the number of leafs, kind of leafs, how many hosts, if there are any access switches (that sit between the leaf and the hosts)) and so on.</p>
+<p><img alt="vqfx_rack2" src="/static/images/juniper/juniper_apstra_2/vqfx_rack2.jpg" /></p>
+<p>The main input for the leafs here are:</p>
+<ul>
+<li>a leaf logical device</li>
+<li>the redundancy model (none, MLAG or ESI)</li>
+<li>how many links per spine (these are taken from how many ports you've assigned as a connection to a spine)</li>
+<li>what kind of port speed for your spine facing links</li>
+</ul>
+<p>Let's provide these inputs for our rack:</p>
+<p><img alt="vqfx_rack3" src="/static/images/juniper/juniper_apstra_2/vqfx_rack3.jpg" /></p>
+<p>Because this is a one leaf rack, the redundacy model chosen is simply none. But watch what happens when you choose ESI:</p>
+<p><img alt="vqfx_rack4" src="/static/images/juniper/juniper_apstra_2/vqfx_rack4.jpg" /></p>
+<p>The number of leafs automatically becomes two. Any guesses on why MLAG is greyed out and cannot be selected? Go back to our logical device for this leaf - we never marked any ports that could be connected to another leaf, which naturally eliminates MLAG as an option since that requires a leaf to leaf connection.</p>
+<p>Now that our leaf is defined, we need to declare the generic systems that will be present in the rack (and how they will be connected to the leaf).</p>
+<p><img alt="vqfx_rack5" src="/static/images/juniper/juniper_apstra_2/vqfx_rack5.jpg" /></p>
+<p>We'd like to have two hosts per rack, and each link is a 10G link back up to the leaf:</p>
+<p><img alt="vqfx_rack6" src="/static/images/juniper/juniper_apstra_2/vqfx_rack6.jpg" /></p>
+<p>As part of the generic system definition, you need to also define properties of the link that will connect the host and the leaf. 'Add logical link' at the bottom allows you to do this. Here, you can configure how many links per host, if there is a need for LACP for link aggregation and so on.</p>
+<p><img alt="vqfx_rack7" src="/static/images/juniper/juniper_apstra_2/vqfx_rack7.jpg" /></p>
+<p>And finally, you can click on 'Create' to create this rack. This is what it looks like visually:</p>
+<p><img alt="vqfx_rack8" src="/static/images/juniper/juniper_apstra_2/vqfx_rack8.jpg" /></p>
+<p>This visual representation of your rack is so cool! It shows you exactly what you built, what it looks like, and if you scroll further down, it shows you each element that was used to build this entire rack.</p>
+<p>In the next post, we're going to build a template, and then stage and deploy our data center.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://www.juniper.net/documentation/us/en/software/apstra4.1/apstra-user-guide/topics/topic-map/get-started.html">Apstra 4.1 documentation</a></li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/aninchat/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/aninchat" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.top", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "search.suggest", "search.highlight", "content.code.annotate", "content.tooltips", "toc.integrate", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>

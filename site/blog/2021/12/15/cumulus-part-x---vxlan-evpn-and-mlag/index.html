@@ -14,6 +14,8 @@
         <link rel="prev" href="../../14/cumulus-part-ix---understanding-vxlan-evpn-route-target-control/">
       
       
+        <link rel="next" href="../../25/cisco-sda-part-i---introduction-to-lisp-and-its-basic-terminology/">
+      
       
       <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
@@ -156,7 +158,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
@@ -212,13 +214,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/hellt/netdevops.me" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/aninchat/mkdocs-theasciiconstruct" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
-    hellt/netdevops.me
+    aninchat/mkdocs-theasciiconstruct
   </div>
 </a>
       </div>
@@ -270,6 +272,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../references/" class="md-tabs__link">
+          
+  
+    
+  
+  Learning References
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -311,13 +333,13 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/hellt/netdevops.me" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/aninchat/mkdocs-theasciiconstruct" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
-    hellt/netdevops.me
+    aninchat/mkdocs-theasciiconstruct
   </div>
 </a>
     </div>
@@ -418,6 +440,8 @@
       
         
       
+        
+      
     
     
       
@@ -448,6 +472,29 @@
             Archive
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    December 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -499,6 +546,26 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -539,11 +606,103 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../category/apstra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    apstra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/arista/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    arista
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../category/bgp/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     bgp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cisco/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cisco
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/containerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    containerlab
   </span>
   
 
@@ -608,11 +767,149 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../category/juniper/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    juniper
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/junos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    junos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/lisp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lisp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../category/mlag/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     mlag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/multivendor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    multivendor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/nxos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nxos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/sda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    sda
   </span>
   
 
@@ -651,6 +948,62 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../../references/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Learning References
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Learning References
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
             
           </ul>
@@ -859,14 +1212,14 @@
 
 <h1 id="cumulus-part-x-vxlan-evpn-and-mlag">Cumulus Part X - VXLAN EVPN and MLAG</h1>
 <p>In this post, we take a look at the interaction of MLAG with an EVPN based VXLAN fabric on Cumulus Linux.</p>
-<!-- more -->
-
 <h2 id="introduction">Introduction</h2>
 <p>MLAG or MC-LAG (multi-chassis link aggregation) is a fairly common deployment model at the access/leaf layer of both Enterprise and Data Center networks, typically offered by most leading vendors (with different terminologies - vPC, VSS, stackwise-virtual and so on).</p>
 <p>The general idea is to offer redundancy at the access layer by pairing together two access/leaf switches into a common logical switch, from the perspective of any devices downstream.  Details of Cumulus' implementation can be found here. </p>
 <h2 id="topology">Topology</h2>
 <p>For this post, we're going to be using the following topology (tested with Cumulus VX 4.2):</p>
 <p><img alt="mlag1" src="/static/images/cumulus/cumulus_part10/cumulus_mlag_1.jpg" /></p>
+<!-- more -->
+
 <p>We have three servers, Server5, Server6 and Server3 in VLAN 10, with another server, Server2, in VLAN 20. Server5 is uplinked to both MLAG peers, while Server6 is an orphan device, off of Leaf4 only. </p>
 <p>We also have external connectivity via PE1, again, connected only to one of the MLAG peers - Leaf3, in this case. PE1 is advertising 99.99.99.99/32, an external network, to Leaf3. </p>
 <p>Logically, for BGP peering, the spines share a common AS, while each leaf is it's own unique AS. This is a standard eBGP type design, meant to avoid BGP path hunting issues. </p>
@@ -875,97 +1228,97 @@
 <p>Each of these devices have a loopback configured. For the leaf's, these loopbacks are the VTEP IPs. The MLAG pair have unique loopacks, but also an anycast CLAG VTEP IP that is configured (similar to a secondary IP):</p>
 <p><img alt="mlag3" src="/static/images/cumulus/cumulus_part10/cumulus_mlag_3.jpg" /></p>
 <p>This CLAG anycast IP is configured under the loopback itself, for both Leaf3 and Leaf4:</p>
-<div class="highlight"><pre><span></span><code>// Leaf3
-
-cumulus@Leaf3:mgmt:~$ net show configuration interface lo
-interface lo
-  # The primary network interface
-  address 3.3.3.3/32
-  clagd-vxlan-anycast-ip 34.34.34.34
-  vxlan-local-tunnelip 3.3.3.3
-
-// Leaf4
-
-cumulus@Leaf4:mgmt:~$ net show configuration interface lo
-interface lo
-  # The primary network interface
-  address 4.4.4.4/32
-  clagd-vxlan-anycast-ip 34.34.34.34
-  vxlan-local-tunnelip 4.4.4.4
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>// Leaf3
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cumulus@Leaf3:mgmt:~$ net show configuration interface lo
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>interface lo
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  # The primary network interface
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  address 3.3.3.3/32
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  clagd-vxlan-anycast-ip 34.34.34.34
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  vxlan-local-tunnelip 3.3.3.3
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>// Leaf4
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>cumulus@Leaf4:mgmt:~$ net show configuration interface lo
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>interface lo
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  # The primary network interface
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  address 4.4.4.4/32
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  clagd-vxlan-anycast-ip 34.34.34.34
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  vxlan-local-tunnelip 4.4.4.4
+</span></code></pre></div>
 <p>Each of the MLAG peers form an eBGP peering with the spines, and an iBGP peering with each other. This iBGP peering is important for failure conditions (we'll look at this in a little bit).</p>
-<div class="highlight"><pre><span></span><code>// IPv4 unicast peering
-
-cumulus@Leaf3:mgmt:~$ net show bgp ipv4 unicast summary 
-BGP router identifier 3.3.3.3, local AS number 64523 vrf-id 0
-BGP table version 26
-RIB entries 11, using 2112 bytes of memory
-Peers 3, using 64 KiB of memory
-
-Neighbor             V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
-Leaf4(peerlink.4094) 4      64523     87384     87976        0    0    0 07:26:27            5
-Spine1(swp1)         4      65550     87974     87971        0    0    0 07:34:50            3
-Spine2(swp2)         4      65550     87973     87968        0    0    0 07:34:50            3
-
-Total number of neighbors 3 
-
-// L2VPN EVPN unicast peering
-
-cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn summary 
-BGP router identifier 3.3.3.3, local AS number 64523 vrf-id 0
-BGP table version 0
-RIB entries 25, using 4800 bytes of memory
-Peers 3, using 64 KiB of memory
-
-Neighbor             V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
-Leaf4(peerlink.4094) 4      64523     87387     87979        0    0    0 07:26:37           30
-Spine1(swp1)         4      65550     87977     87974        0    0    0 07:35:00           30
-Spine2(swp2)         4      65550     87976     87971        0    0    0 07:35:00           30
-
-Total number of neighbors 3
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>// IPv4 unicast peering
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>cumulus@Leaf3:mgmt:~$ net show bgp ipv4 unicast summary 
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>BGP router identifier 3.3.3.3, local AS number 64523 vrf-id 0
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>BGP table version 26
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>RIB entries 11, using 2112 bytes of memory
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Peers 3, using 64 KiB of memory
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Neighbor             V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Leaf4(peerlink.4094) 4      64523     87384     87976        0    0    0 07:26:27            5
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Spine1(swp1)         4      65550     87974     87971        0    0    0 07:34:50            3
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Spine2(swp2)         4      65550     87973     87968        0    0    0 07:34:50            3
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Total number of neighbors 3 
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>// L2VPN EVPN unicast peering
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn summary 
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>BGP router identifier 3.3.3.3, local AS number 64523 vrf-id 0
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>BGP table version 0
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>RIB entries 25, using 4800 bytes of memory
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>Peers 3, using 64 KiB of memory
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>Neighbor             V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>Leaf4(peerlink.4094) 4      64523     87387     87979        0    0    0 07:26:37           30
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>Spine1(swp1)         4      65550     87977     87974        0    0    0 07:35:00           30
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>Spine2(swp2)         4      65550     87976     87971        0    0    0 07:35:00           30
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>Total number of neighbors 3
+</span></code></pre></div>
 <h2 id="control-plane-learning-with-mlag">Control-plane learning with MLAG</h2>
 <p>When a MAC address is learnt over the MLAG, it is synced to the MLAG peer as well. Both the peers would insert the entry in their BGP EVPN tables and advertise it out. As an example, Server5s MAC address is learnt by both Leaf3 and Leaf4 and advertised via BGP EVPN to the spines and to each other, over the iBGP peering.</p>
-<div class="highlight"><pre><span></span><code>// Leaf3
-
-cumulus@Leaf3:mgmt:~$ net show bridge macs 00:00:00:00:00:05
-
-VLAN  Master  Interface     MAC                TunnelDest  State  Flags  LastSeen
-----  ------  ------------  -----------------  ----------  -----  -----  --------
-  10  bridge  bond-server5  00:00:00:00:00:05                            00:01:03
-
-cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 3.3.3.3:2 mac 00:00:00:00:00:05 
-BGP routing table entry for 3.3.3.3:2:[2]:[0]:[48]:[00:00:00:00:00:05]
-Paths: (1 available, best #1)
-  Advertised to non peer-group peers:
-  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
-  Route [2]:[0]:[48]:[00:00:00:00:00:05] VNI 10010/10040
-  Local
-    34.34.34.34 from 0.0.0.0 (3.3.3.3)
-      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
-      Extended Community: ET:8 RT:3:10010 RT:3:10040 Rmac:44:38:39:ff:00:05 MM:1
-      Last update: Wed Aug  4 06:28:11 2021
-
-// Leaf4
-
-cumulus@Leaf4:mgmt:~$ net show bridge macs 00:00:00:00:00:05
-
-VLAN  Master  Interface     MAC                TunnelDest  State  Flags  LastSeen
-----  ------  ------------  -----------------  ----------  -----  -----  --------
-  10  bridge  bond-server5  00:00:00:00:00:05                            00:00:11
-
-cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:05
-BGP routing table entry for 4.4.4.4:3:[2]:[0]:[48]:[00:00:00:00:00:05]
-Paths: (1 available, best #1)
-  Advertised to non peer-group peers:
-  Leaf3(peerlink.4094) Spine1(swp1) Spine2(swp2)
-  Route [2]:[0]:[48]:[00:00:00:00:00:05] VNI 10010/10040
-  Local
-    34.34.34.34 from 0.0.0.0 (4.4.4.4)
-      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
-      Extended Community: ET:8 RT:4:10010 RT:4:10040 Rmac:44:38:39:ff:00:05
-      Last update: Wed Aug  4 12:17:01 2021
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>// Leaf3
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>cumulus@Leaf3:mgmt:~$ net show bridge macs 00:00:00:00:00:05
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>VLAN  Master  Interface     MAC                TunnelDest  State  Flags  LastSeen
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>----  ------  ------------  -----------------  ----------  -----  -----  --------
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  10  bridge  bond-server5  00:00:00:00:00:05                            00:01:03
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 3.3.3.3:2 mac 00:00:00:00:00:05 
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>BGP routing table entry for 3.3.3.3:2:[2]:[0]:[48]:[00:00:00:00:00:05]
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Paths: (1 available, best #1)
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  Advertised to non peer-group peers:
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:05] VNI 10010/10040
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  Local
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    34.34.34.34 from 0.0.0.0 (3.3.3.3)
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>      Extended Community: ET:8 RT:3:10010 RT:3:10040 Rmac:44:38:39:ff:00:05 MM:1
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>      Last update: Wed Aug  4 06:28:11 2021
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>// Leaf4
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>cumulus@Leaf4:mgmt:~$ net show bridge macs 00:00:00:00:00:05
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>VLAN  Master  Interface     MAC                TunnelDest  State  Flags  LastSeen
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>----  ------  ------------  -----------------  ----------  -----  -----  --------
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>  10  bridge  bond-server5  00:00:00:00:00:05                            00:00:11
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:05
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>BGP routing table entry for 4.4.4.4:3:[2]:[0]:[48]:[00:00:00:00:00:05]
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>Paths: (1 available, best #1)
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>  Advertised to non peer-group peers:
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>  Leaf3(peerlink.4094) Spine1(swp1) Spine2(swp2)
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:05] VNI 10010/10040
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>  Local
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>    34.34.34.34 from 0.0.0.0 (4.4.4.4)
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>      Extended Community: ET:8 RT:4:10010 RT:4:10040 Rmac:44:38:39:ff:00:05
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>      Last update: Wed Aug  4 12:17:01 2021
+</span></code></pre></div>
 <p>There are two big things to remember with MLAG and BGP EVPN advertisements:</p>
 <ol>
 <li>
@@ -978,224 +1331,224 @@ Paths: (1 available, best #1)
 <p>The first big why - why do we need an anycast VTEP IP address for the MLAG peers? This just allows for easy BGP filtering - remember, when Leaf3 advertises a prefix into BGP EVPN, it adds it's own AS number, since the update is being sent to eBGP peers (Spine1/Spine2). When Leaf4 gets this, the update is denied because it sees it's own AS - basic BGP loop prevention. </p>
 <p>However, this doesn't apply to the iBGP peering that is created over the peer-link. This is where the anycast VTEP IP is useful - because the next-hop is owned by the peers, they will drop any BGP NLRI which has this next-hop (due to self next-hop/martian check). This is important because we wouldn't want the MLAG peers to see each other as next hops (over VXLAN) for locally attached hosts. </p>
 <p>With a simple BGP updates debug, you can confirm that the peers drop this because of the self next-hop check:</p>
-<div class="highlight"><pre><span></span><code>Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE w/ attr: nexthop 34.34.34.34, 
-localpref 100, extcommunity RT:3:10010 RT:3:10040 ET:8 MM:1 Rmac:44:38:39:ff:00:05, path
-
-Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE about RD 3.3.3.3:2 
-[2]:[00:00:00:00:00:05]/320 label 10010 
-l2vpn evpn -- DENIED due to: martian or self next-hop;
-
-Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE about RD 3.3.3.3:2 
-[2]:[00:00:00:00:00:05]:[10.10.10.105]/320 label 10010/10040 
-l2vpn evpn -- DENIED due to: martian or self next-hop;
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE w/ attr: nexthop 34.34.34.34, 
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>localpref 100, extcommunity RT:3:10010 RT:3:10040 ET:8 MM:1 Rmac:44:38:39:ff:00:05, path
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE about RD 3.3.3.3:2 
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>[2]:[00:00:00:00:00:05]/320 label 10010 
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>l2vpn evpn -- DENIED due to: martian or self next-hop;
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Leaf4 bgpd[895]: peerlink.4094 rcvd UPDATE about RD 3.3.3.3:2 
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>[2]:[00:00:00:00:00:05]:[10.10.10.105]/320 label 10010/10040 
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>l2vpn evpn -- DENIED due to: martian or self next-hop;
+</span></code></pre></div>
 <p>Remember, even orphan devices are sent with this anycast VTEP address. For example, in our case, Server6 is an orphan device. Leaf4 sends the BGP EVPN update with the anycast VTEP address:</p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:06 ip 10.10.10.106
-BGP routing table entry for 4.4.4.4:3:[2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106]
-Paths: (1 available, best #1)
-  Advertised to non peer-group peers:
-  Leaf3(peerlink.4094) Spine1(swp1) Spine2(swp2)
-  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
-  Local
-    34.34.34.34 from 0.0.0.0 (4.4.4.4)
-      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
-      Extended Community: ET:8 RT:4:10010 RT:4:10040 Rmac:44:38:39:ff:00:05
-      Last update: Wed Aug  4 12:17:01 2021
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:06 ip 10.10.10.106
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>BGP routing table entry for 4.4.4.4:3:[2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106]
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Paths: (1 available, best #1)
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  Advertised to non peer-group peers:
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  Leaf3(peerlink.4094) Spine1(swp1) Spine2(swp2)
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  Local
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    34.34.34.34 from 0.0.0.0 (4.4.4.4)
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>      Extended Community: ET:8 RT:4:10010 RT:4:10040 Rmac:44:38:39:ff:00:05
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>      Last update: Wed Aug  4 12:17:01 2021
+</span></code></pre></div>
 <p>On remote VTEPs (taking Leaf5, as an example), this is installed with 34.34.34.34 as the next-hop:</p>
-<div class="highlight"><pre><span></span><code>// BGP table
-
-cumulus@Leaf5:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:06 ip 10.10.10.106
-BGP routing table entry for 4.4.4.4:3:[2]:[00:00:00:00:00:06]:[10.10.10.106]/352
-Paths: (2 available, best #2)
-  Advertised to non peer-group peers:
-  Spine1(swp1) Spine2(swp2)
-  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
-  65550 64523
-    34.34.34.34 from Spine2(swp2) (22.22.22.22)
-      Origin IGP, valid, external
-      Extended Community: RT:4:10010 RT:4:10040 ET:8 Rmac:44:38:39:ff:00:05
-      Last update: Wed Aug  4 12:17:02 2021
-  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
-  65550 64523
-    34.34.34.34 from Spine1(swp1) (11.11.11.11)
-      Origin IGP, valid, external, bestpath-from-AS 65550, best (Older Path)
-      Extended Community: RT:4:10010 RT:4:10040 ET:8 Rmac:44:38:39:ff:00:05
-      Last update: Wed Aug  4 12:17:02 2021
-
-// RIB table
-
-cumulus@Leaf5:mgmt:~$ net show route vrf VRF1 ipv4 
-Codes: K - kernel route, C - connected, S - static, R - RIP,
-       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
-       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
-       F - PBR, f - OpenFabric,
-       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
-       t - trapped, o - offload failure
-
-VRF VRF1:
-K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 2d04h24m
-C&gt;* 10.10.10.0/24 is directly connected, vlan10, 2d04h21m
-B&gt;* 10.10.10.105/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 05:58:40
-B&gt;* 10.10.10.106/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 1d07h40m
-C&gt;* 20.20.20.0/24 is directly connected, vlan20, 2d04h21m
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>// BGP table
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>cumulus@Leaf5:mgmt:~$ net show bgp l2vpn evpn route rd 4.4.4.4:3 mac 00:00:00:00:00:06 ip 10.10.10.106
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>BGP routing table entry for 4.4.4.4:3:[2]:[00:00:00:00:00:06]:[10.10.10.106]/352
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Paths: (2 available, best #2)
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  Advertised to non peer-group peers:
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  Spine1(swp1) Spine2(swp2)
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  65550 64523
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    34.34.34.34 from Spine2(swp2) (22.22.22.22)
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>      Origin IGP, valid, external
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>      Extended Community: RT:4:10010 RT:4:10040 ET:8 Rmac:44:38:39:ff:00:05
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>      Last update: Wed Aug  4 12:17:02 2021
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:06]:[32]:[10.10.10.106] VNI 10010/10040
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>  65550 64523
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    34.34.34.34 from Spine1(swp1) (11.11.11.11)
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>      Origin IGP, valid, external, bestpath-from-AS 65550, best (Older Path)
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>      Extended Community: RT:4:10010 RT:4:10040 ET:8 Rmac:44:38:39:ff:00:05
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>      Last update: Wed Aug  4 12:17:02 2021
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>// RIB table
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>cumulus@Leaf5:mgmt:~$ net show route vrf VRF1 ipv4 
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>Codes: K - kernel route, C - connected, S - static, R - RIP,
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>       F - PBR, f - OpenFabric,
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>       t - trapped, o - offload failure
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>VRF VRF1:
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 2d04h24m
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>C&gt;* 10.10.10.0/24 is directly connected, vlan10, 2d04h21m
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>B&gt;* 10.10.10.105/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 05:58:40
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>B&gt;* 10.10.10.106/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 1d07h40m
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>C&gt;* 20.20.20.0/24 is directly connected, vlan20, 2d04h21m
+</span></code></pre></div>
 <p>This can cause traffic for this prefix to hash towards Leaf3 (which does not have a direct connection to Server6). Let's take an example of Server3 pinging Server6. </p>
 <p>Because this is a same subnet ping, Server3 tries to ARP for the destination directly. Leaf5 responds back because it already has an entry for Server6 in it's EVPN ARP cache:</p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf5:mgmt:~$ net show evpn arp vni 10010 ip 10.10.10.106
-IP: 10.10.10.106
- Type: remote
- State: active
- MAC: 00:00:00:00:00:06
- Sync-info: -
- Remote VTEP: 34.34.34.34
- Local Seq: 0 Remote Seq: 0 
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cumulus@Leaf5:mgmt:~$ net show evpn arp vni 10010 ip 10.10.10.106
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>IP: 10.10.10.106
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> Type: remote
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> State: active
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> MAC: 00:00:00:00:00:06
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a> Sync-info: -
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> Remote VTEP: 34.34.34.34
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a> Local Seq: 0 Remote Seq: 0 
+</span></code></pre></div>
 <p>Server3 can now send the ICMP request to Leaf5. The destination MAC address is 00:00:00:00:00:06. Leaf5 does a lookup in it's MAC address table, and sends the packet out with VNI 10010, towards a destination of 34.34.34.34 (the anycast VTEP address, owned by both Leaf3 and Leaf4):</p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf5:mgmt:~$ net show bridge macs 00:00:00:00:00:06
-
-VLAN      Master  Interface  MAC                TunnelDest   State  Flags               LastSeen
---------  ------  ---------  -----------------  -----------  -----  ------------------  --------
-10        bridge  vni10      00:00:00:00:00:06                      extern_learn        01:20:27
-untagged          vni10      00:00:00:00:00:06  34.34.34.34         self, extern_learn  01:20:27
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cumulus@Leaf5:mgmt:~$ net show bridge macs 00:00:00:00:00:06
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>VLAN      Master  Interface  MAC                TunnelDest   State  Flags               LastSeen
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>--------  ------  ---------  -----------------  -----------  -----  ------------------  --------
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>10        bridge  vni10      00:00:00:00:00:06                      extern_learn        01:20:27
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>untagged          vni10      00:00:00:00:00:06  34.34.34.34         self, extern_learn  01:20:27
+</span></code></pre></div>
 <p>A packet capture confirms the L2VNI:</p>
 <p><img alt="mlag4" src="/static/images/cumulus/cumulus_part10/cumulus_pcap_l2vni.jpg" /></p>
 <p>This can be hashed towards Leaf3. Leaf3 simply does a MAC address lookup (for 00:00:00:00:00:06) now, and find's that is it reachable via the peer-link:</p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf3:mgmt:~$ net show bridge macs 00:00:00:00:00:06
-
-VLAN  Master  Interface  MAC                TunnelDest  State  Flags  LastSeen
-----  ------  ---------  -----------------  ----------  -----  -----  --------
-  10  bridge  peerlink   00:00:00:00:00:06                            00:00:53
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cumulus@Leaf3:mgmt:~$ net show bridge macs 00:00:00:00:00:06
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>VLAN  Master  Interface  MAC                TunnelDest  State  Flags  LastSeen
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>----  ------  ---------  -----------------  ----------  -----  -----  --------
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  10  bridge  peerlink   00:00:00:00:00:06                            00:00:53
+</span></code></pre></div>
 <p>Thus, visually, the path of the packet in this case would be:</p>
 <p><img alt="mlag4" src="/static/images/cumulus/cumulus_part10/cumulus_mlag_4.jpg" /></p>
 <p>The next big why - why are type-5 EVPN routes sent with the local VTEP address, instead of the anycast VTEP address? It is quite common to see external prefixes advertised via one of the MLAG peers only, and not both. In such cases, you can potentially black hole traffic by advertising these type-5 prefixes with the anycast VTEP address (because traffic may be ECMP'd to the peer which does not have a route to these external prefixes). Of course, this can be fixed by having per VRF iBGP peering between the MLAG peers but it doesn't scale well and is a lot of administrative overhead.</p>
 <p>In general, the 'advertise-pip' BGP EVPN option is used for this - the local VTEP IP address is the 'Primary IP'. Cumulus Linux introduced this in their 4.0 release and it is enabled by default. </p>
 <p>However, it needs to be configured in a particular way for it to work. Prior to 4.0, you could use the 'hwaddress' option to specify a MAC address for an interface. From 4.0 onward, you need to use the 'address-virtual' option to create the common router MAC that is shared between the two MLAG peers. This allows for each MLAG peer to retain it's unique system MAC and share this common router MAC. </p>
 <p>This change is done under the SVI that maps to the L3VNI:</p>
-<div class="highlight"><pre><span></span><code>// Leaf3
-
-cumulus@Leaf3:mgmt:~$ net show configuration interface vlan40
-interface vlan40
-  address-virtual 44:38:39:FF:00:05
-  vlan-id 40
-  vlan-raw-device bridge
-  vrf VRF1
-
-// Leaf4
-
-cumulus@Leaf4:mgmt:~$ net show configuration interface vlan40
-interface vlan40
-  address-virtual 44:38:39:FF:00:05
-  vlan-id 40
-  vlan-raw-device bridge
-  vrf VRF1
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>// Leaf3
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>cumulus@Leaf3:mgmt:~$ net show configuration interface vlan40
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>interface vlan40
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  address-virtual 44:38:39:FF:00:05
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  vlan-id 40
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  vlan-raw-device bridge
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  vrf VRF1
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>// Leaf4
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>cumulus@Leaf4:mgmt:~$ net show configuration interface vlan40
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>interface vlan40
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  address-virtual 44:38:39:FF:00:05
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  vlan-id 40
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  vlan-raw-device bridge
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>  vrf VRF1
+</span></code></pre></div>
 <p>You should now see the router MAC changed to this common anycast MAC address (general practice is to just set it as the CLAG MAC address), while the system MAC is retained. </p>
-<div class="highlight"><pre><span></span><code>// Leaf3
-
-cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn vni 10040
-VNI: 10040 (known to the kernel)
-  Type: L3
-  Tenant VRF: VRF1
-  RD: 12.12.12.1:3
-  Originator IP: 34.34.34.34
-  Advertise-gw-macip : n/a
-  Advertise-svi-macip : n/a
-  Advertise-pip: Yes
-  System-IP: 3.3.3.3
-  System-MAC: 50:00:00:05:00:05
-  Router-MAC: 44:38:39:ff:00:05
-  Import Route Target:
-    1:10040
-    2:10040
-    4:10040
-    5:10040
-  Export Route Target:
-    3:10040 
-
-// Leaf4
-
-cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn vni 10040
-VNI: 10040 (known to the kernel)
-  Type: L3
-  Tenant VRF: VRF1
-  RD: 50.50.50.1:2
-  Originator IP: 34.34.34.34
-  Advertise-gw-macip : n/a
-  Advertise-svi-macip : n/a
-  Advertise-pip: Yes
-  System-IP: 4.4.4.4
-  System-MAC: 50:00:00:06:00:05
-  Router-MAC: 44:38:39:ff:00:05
-  Import Route Target:
-    1:10040
-    2:10040
-    3:10040
-    5:10040
-  Export Route Target:
-    4:10040 
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>// Leaf3
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn vni 10040
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>VNI: 10040 (known to the kernel)
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  Type: L3
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  Tenant VRF: VRF1
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  RD: 12.12.12.1:3
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  Originator IP: 34.34.34.34
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>  Advertise-gw-macip : n/a
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  Advertise-svi-macip : n/a
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>  Advertise-pip: Yes
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>  System-IP: 3.3.3.3
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>  System-MAC: 50:00:00:05:00:05
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>  Router-MAC: 44:38:39:ff:00:05
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>  Import Route Target:
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    1:10040
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    2:10040
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    4:10040
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    5:10040
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>  Export Route Target:
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    3:10040 
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>// Leaf4
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>cumulus@Leaf4:mgmt:~$ net show bgp l2vpn evpn vni 10040
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>VNI: 10040 (known to the kernel)
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>  Type: L3
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>  Tenant VRF: VRF1
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>  RD: 50.50.50.1:2
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>  Originator IP: 34.34.34.34
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>  Advertise-gw-macip : n/a
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>  Advertise-svi-macip : n/a
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>  Advertise-pip: Yes
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>  System-IP: 4.4.4.4
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>  System-MAC: 50:00:00:06:00:05
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>  Router-MAC: 44:38:39:ff:00:05
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>  Import Route Target:
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>    1:10040
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>    2:10040
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>    3:10040
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>    5:10040
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>  Export Route Target:
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>    4:10040 
+</span></code></pre></div>
 <p>This gives a lot of good information - it tells you that 'advertise-pip' is enabled, what the system IP is, what the system MAC and the router MAC is. Thus, for type-5 prefixes, the system IP and the system MAC are used, and for type-2 prefix (regardless of the host being an orphan host), the router MAC and the anycast VTEP IP address is used. </p>
 <p>The type-5 routes are now generated using the system IP and MAC itself. </p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 12.12.12.1:3 prefix 99.99.99.99/32
-BGP routing table entry for 12.12.12.1:3:[5]:[0]:[32]:[99.99.99.99]
-Paths: (1 available, best #1)
-  Advertised to non peer-group peers:
-  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
-  Route [5]:[0]:[32]:[99.99.99.99] VNI 10040
-  12
-    3.3.3.3 from 0.0.0.0 (3.3.3.3)
-      Origin IGP, metric 0, valid, sourced, local, bestpath-from-AS 12, best (First path received)
-      Extended Community: ET:8 RT:3:10040 Rmac:50:00:00:05:00:05
-      Last update: Tue Aug  3 04:46:12 2021
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 12.12.12.1:3 prefix 99.99.99.99/32
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>BGP routing table entry for 12.12.12.1:3:[5]:[0]:[32]:[99.99.99.99]
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Paths: (1 available, best #1)
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  Advertised to non peer-group peers:
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  Route [5]:[0]:[32]:[99.99.99.99] VNI 10040
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  12
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    3.3.3.3 from 0.0.0.0 (3.3.3.3)
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>      Origin IGP, metric 0, valid, sourced, local, bestpath-from-AS 12, best (First path received)
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>      Extended Community: ET:8 RT:3:10040 Rmac:50:00:00:05:00:05
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>      Last update: Tue Aug  3 04:46:12 2021
+</span></code></pre></div>
 <p>This is advertised only with the L3VNI. On other VTEPs, this should be installed in the VRF table:</p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf5:mgmt:~$ net show route vrf VRF1 ipv4
-Codes: K - kernel route, C - connected, S - static, R - RIP,
-       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
-       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
-       F - PBR, f - OpenFabric,
-       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
-       t - trapped, o - offload failure
-
-VRF VRF1:
-K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 5d00h05m
-C&gt;* 10.10.10.0/24 is directly connected, vlan10, 5d00h02m
-B&gt;* 10.10.10.105/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 04:16:51
-B&gt;* 10.10.10.106/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 04:16:51
-C&gt;* 20.20.20.0/24 is directly connected, vlan20, 5d00h02m
-B&gt;* 99.99.99.99/32 [20/0] via 3.3.3.3, vlan40 onlink, weight 1, 00:00:01
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cumulus@Leaf5:mgmt:~$ net show route vrf VRF1 ipv4
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Codes: K - kernel route, C - connected, S - static, R - RIP,
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>       F - PBR, f - OpenFabric,
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>       t - trapped, o - offload failure
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>VRF VRF1:
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 5d00h05m
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>C&gt;* 10.10.10.0/24 is directly connected, vlan10, 5d00h02m
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>B&gt;* 10.10.10.105/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 04:16:51
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>B&gt;* 10.10.10.106/32 [20/0] via 34.34.34.34, vlan40 onlink, weight 1, 04:16:51
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>C&gt;* 20.20.20.0/24 is directly connected, vlan20, 5d00h02m
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>B&gt;* 99.99.99.99/32 [20/0] via 3.3.3.3, vlan40 onlink, weight 1, 00:00:01
+</span></code></pre></div>
 <p>Before we wrap this up, it is important to talk about some failure scenarios with MLAG. An important design consideration (and we'll see this more prominently when we talk about Ethernet Segments in EVPN), is that losing a downlink (towards the server itself) has no control-plane implications. There is absolutely no control-plane convergence because of this - it is purely a data plane forwarding change. </p>
 <p>For example, say Leaf3s interface going to Server5 goes down.  Traffic can still be hashed towards Leaf3, destined for Server5. It would just be forwarded over the peer-link. This is why capacity planning of the peer-link is equally important. </p>
 <p>A second failure scenario to consider is what would happen if all fabric links go down. So, for example, Leaf3 loses all its spine facing links and the packet from Server5 (destined to Server2) is hashed to Leaf3. </p>
 <p>This is where the iBGP peering is useful. Prior to this event, the route is received via the spines, and via the iBGP peering to the MLAG peer. </p>
-<div class="highlight"><pre><span></span><code>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 5.5.5.5:2 mac 00:00:00:00:00:02 ip 20.20.20.102
-BGP routing table entry for 5.5.5.5:2:[2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102]
-Paths: (3 available, best #2)
-  Advertised to non peer-group peers:
-  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
-  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
-  65550 64525
-    5.5.5.5 from Leaf4(peerlink.4094) (4.4.4.4)
-      Origin IGP, localpref 100, valid, internal
-      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
-      Last update: Sat Aug  7 08:18:29 2021
-  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
-  65550 64525
-    5.5.5.5 from Spine1(swp1) (11.11.11.11)
-      Origin IGP, valid, external, bestpath-from-AS 65550, best (Older Path)
-      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
-      Last update: Sat Aug  7 03:51:08 2021
-  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
-  65550 64525
-    5.5.5.5 from Spine2(swp2) (22.22.22.22)
-      Origin IGP, valid, external
-      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
-      Last update: Sat Aug  7 03:51:08 2021
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>cumulus@Leaf3:mgmt:~$ net show bgp l2vpn evpn route rd 5.5.5.5:2 mac 00:00:00:00:00:02 ip 20.20.20.102
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>BGP routing table entry for 5.5.5.5:2:[2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102]
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Paths: (3 available, best #2)
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  Advertised to non peer-group peers:
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  Leaf4(peerlink.4094) Spine1(swp1) Spine2(swp2)
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  65550 64525
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    5.5.5.5 from Leaf4(peerlink.4094) (4.4.4.4)
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>      Origin IGP, localpref 100, valid, internal
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>      Last update: Sat Aug  7 08:18:29 2021
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  65550 64525
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>    5.5.5.5 from Spine1(swp1) (11.11.11.11)
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>      Origin IGP, valid, external, bestpath-from-AS 65550, best (Older Path)
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>      Last update: Sat Aug  7 03:51:08 2021
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>  Route [2]:[0]:[48]:[00:00:00:00:00:02]:[32]:[20.20.20.102] VNI 10020/10040
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>  65550 64525
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>    5.5.5.5 from Spine2(swp2) (22.22.22.22)
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>      Origin IGP, valid, external
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>      Extended Community: RT:5:10020 RT:5:10040 ET:8 Rmac:00:20:00:20:00:20
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>      Last update: Sat Aug  7 03:51:08 2021
+</span></code></pre></div>
 <p>After the link down event (and route withdrawals), the traffic is simply routed via the peer-link. If the iBGP peering was missing, traffic would be blackholed on Leaf3.</p>
 <p>In the next post, we'll look at how Ethernet Segment based EVPN multi-homing acts as an alternative to MLAGs.</p>
 
