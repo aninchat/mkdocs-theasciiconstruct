@@ -1,0 +1,92 @@
+site_name: The ASCII Construct
+site_url: https://www.theasciiconstruct.com/
+repo_name: hellt/netdevops.me
+repo_url: https://github.com/hellt/netdevops.me
+extra_css:
+  - stylesheets/extra.css
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/aninchat/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/aninchat
+  analytics:
+    provider: google
+    property: G-KE4X74VVDE
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/dbc_3334.png
+  features:
+    - navigation.top
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.path
+    - search.suggest
+    - search.highlight
+    - content.code.annotate
+    - content.tooltips
+    - toc.integrate
+    - navigation.indexes
+  font:
+    text: Syne Mono
+    code: Fira Code
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+      primary: white
+      accent: cyan
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+      primary: black
+      accent: cyan
+plugins:
+  - blog:
+      post_excerpt: optional
+      archive_date_format: MMMM yyyy
+      categories_allowed:
+        - juniper
+        - junos
+        - cumulus
+        - bgp
+        - evpn
+        - vxlan
+        - mlag
+        - apstra
+        - containerlab
+        - arista
+        - nxos
+        - cisco
+        - multivendor
+        - sda
+        - lisp
+  - search
+  - tags
+nav:
+  - Home: index.md
+  - Blog:
+     - blog/index.md
+  - "Learning References":
+      - references/index.md
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg

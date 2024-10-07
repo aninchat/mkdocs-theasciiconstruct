@@ -1,0 +1,59 @@
+.md-grid {
+    max-width: 1400px; 
+  }
+
+.md-header__title {
+  flex-grow: 1;
+  font-size: 1.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  font-family: "Syne Mono"
+}
+
+.md-tabs {
+    font-family: "Syne Mono";
+}
+
+.md-tabs__list {
+    justify-content: center;
+}
+
+.md-tabs__item {
+    height: 1.95rem;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+/* font size and family for text in body */
+
+.md-typeset {
+    font-family: "Fira Code";
+    line-height: 1.2;
+    font-size: 0.7rem
+}
+
+/* font family for h1 and h2 headers */
+
+.md-typeset h1 {
+    font-family: "Syne Mono"
+}
+
+.md-typeset h2 {
+    font-family: "Syne Mono"
+}
+
+/* control imaging sizing */
+
+.md-typeset img {
+    max-width: 85%
+}
+
+/* control code block coloring 
+
+:root > * {
+    --md-code-fg-color--dark: #FFFFFF
+}
+
+not working right now 
+
+*/

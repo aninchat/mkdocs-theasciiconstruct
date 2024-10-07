@@ -1,0 +1,1373 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://www.theasciiconstruct.com/blog/2021/12/14/cumulus-part-ix---understanding-vxlan-evpn-route-target-control/">
+      
+      
+        <link rel="prev" href="../../13/cumulus-basics-part-viii---vxlan-symmetric-routing-and-multi-tenancy/">
+      
+      
+        <link rel="next" href="../../15/cumulus-part-x---vxlan-evpn-and-mlag/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Cumulus Part IX - Understanding VXLAN EVPN Route-Target control - The ASCII Construct</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne+Mono:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Syne Mono";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-KE4X74VVDE"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-KE4X74VVDE",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-KE4X74VVDE",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cumulus-part-ix-understanding-vxlan-evpn-route-target-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+    Buy my latest book 
+    <a style="color:White" href="https://www.pearson.com/en-us/subject-catalog/p/deploying-juniper-data-centers-with-evpn-vxlan/P200000011537/9780138225377">
+        <em><b>Deploying Juniper Data Centers with EVPN VXLAN</b></em>!
+    </a>
+  
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="The ASCII Construct" class="md-header__button md-logo" aria-label="The ASCII Construct" data-md-component="logo">
+      
+  <img src="../../../../../assets/dbc_3334.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            The ASCII Construct
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cumulus Part IX - Understanding VXLAN EVPN Route-Target control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hellt/netdevops.me" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hellt/netdevops.me
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="The ASCII Construct" class="md-nav__button md-logo" aria-label="The ASCII Construct" data-md-component="logo">
+      
+  <img src="../../../../../assets/dbc_3334.png" alt="logo">
+
+    </a>
+    The ASCII Construct
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hellt/netdevops.me" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hellt/netdevops.me
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    December 2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/bgp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bgp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cumulus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cumulus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/evpn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    evpn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/mlag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mlag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/vxlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vxlan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/dbc_3334.png" alt="Aninda Chatterjee">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Aninda Chatterjee
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2021-12-14 00:00:00" class="md-ellipsis">December 14, 2021</time>
+                      </div>
+                    </li>
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"/></svg>
+                          <time datetime="2021-12-14 00:00:00" class="md-ellipsis">December 14, 2021</time>
+                        </div>
+                      </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/cumulus/">cumulus</a>, 
+                              <a href="../../../../category/vxlan/">vxlan</a>, 
+                              <a href="../../../../category/evpn/">evpn</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              13 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topology
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rts-in-an-l2vni-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      RTs in an L2VNI environment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RTs in an L2VNI environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-manual-rts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding manual RTs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rts-with-symmetric-irb" class="md-nav__link">
+    <span class="md-ellipsis">
+      RTs with symmetric IRB
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-rts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlling RTs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">cumulus</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">vxlan</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">evpn</span>
+    
+  
+</nav>
+
+
+  
+  
+
+
+<h1 id="cumulus-part-ix-understanding-vxlan-evpn-route-target-control">Cumulus Part IX - Understanding VXLAN EVPN Route-Target control</h1>
+<p>In this post, we look at how route-targets extended communities can be used to control VXLAN BGP EVPN routes in Cumulus Linux.</p>
+<!-- more -->
+
+<h2 id="introduction">Introduction</h2>
+<p>This post assumes that the reader has a general understanding of L2/L3 VNIs and asymmetric/symmetric IRB.</p>
+<p>Cumulus, by default, uses auto RTs for L2 and L3 VNIs. This makes for a very easy experience (almost plug and play like) when building VXLAN BGP EVPN fabrics. But it also doesn't help you understand much of how route-targets are being imported across and how to completely control this. </p>
+<p>It's always good to learn to drive a stick, before moving to an automatic. So, the goal of this blog is to help understand how L2/L3 VNI RTs are exported/imported and how you can control what goes into your customer VRF.  This will also allow you to control whether you want asymmetric or symmetric IRB (see my previous Cumulus blog posts to understand what is asymmetric and symmetric IRB).</p>
+<h2 id="topology">Topology</h2>
+<p>For this post, we're going to use the following topology and incrementally add/delete/modify certain aspects of this network. </p>
+<p><img alt="rt1" src="/static/images/cumulus/cumulus_part9/cumulus_RTs_1.jpg" /></p>
+<h2 id="rts-in-an-l2vni-environment">RTs in an L2VNI environment</h2>
+<p>To begin with, this is a pure L2 VNI setup with two servers (Server1 and Server2) deployed in VLAN 10, mapped to VNI 10010. The network is a BGP unnumbered core, with loopbacks of each leaf acting as the VXLAN tunnel IPs. </p>
+<p>Let's review the BGP configuration:</p>
+<div class="highlight"><pre><span></span><code>router bgp 64521
+  bgp router-id 1.1.1.1
+  neighbor swp1 interface remote-as external
+  neighbor swp2 interface remote-as external
+
+  address-family ipv4 unicast
+    network 1.1.1.1/32 
+
+  address-family l2vpn evpn
+    neighbor swp1 activate
+    neighbor swp2 activate
+    advertise-all-vni
+</code></pre></div>
+<p>Typical BGP configuration - we're advertising all VNIs into EVPN and the BGP L2VPN EVPN peering is activated against both Spine1 and Spine2. By default, Cumulus Linux (FRR, really) uses a model of ASN:VNI to derive the VNI RTs. </p>
+<p>In our case, this will be 64521:10010 for VNI 10010. We can confirm using the following:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show bgp l2vpn evpn vni 10010
+VNI: 10010 (known to the kernel)
+  Type: L2
+  Tenant-Vrf: default
+  RD: 1.1.1.1:2
+  Originator IP: 1.1.1.1
+  Mcast group: 0.0.0.0
+  Advertise-gw-macip : Disabled
+  Advertise-svi-macip : Disabled
+  Import Route Target:
+    64521:10010
+  Export Route Target:
+    64521:10010
+</code></pre></div>
+<p>PC1s mac address is advertised as a type-2 route using this export RT:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show bgp l2vpn evpn route rd 1.1.1.1:2 mac 00:50:79:66:68:06 
+BGP routing table entry for 1.1.1.1:2:[2]:[00:50:79:66:68:06]/352
+Paths: (1 available, best #1)
+  Advertised to non peer-group peers:
+  Spine1(swp1) Spine2(swp2)
+  Route [2]:[0]:[48]:[00:50:79:66:68:06] VNI 10010
+  Local
+    1.1.1.1 from 0.0.0.0 (1.1.1.1)
+      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+      Extended Community: ET:8 RT:64521:10010
+      Last update: Sat Jul 24 16:30:57 2021
+</code></pre></div>
+<p>This is correctly imported on Leaf2. Cumulus does not show the route imported into the local RD in the BGP table, however, bgpd informs zebra and zebra has installed it in the MAC address table.</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net show bgp l2vpn evpn route rd 1.1.1.1:2 mac 00:50:79:66:68:06
+BGP routing table entry for 1.1.1.1:2:[2]:[00:50:79:66:68:06]/352
+Paths: (2 available, best #1)
+  Advertised to non peer-group peers:
+  Spine1(swp1) Spine2(swp2)
+  Route [2]:[0]:[48]:[00:50:79:66:68:06] VNI 10010
+  65550 64521
+    1.1.1.1 from Spine1(swp1) (11.11.11.11)
+      Origin IGP, valid, external, bestpath-from-AS 65550, best (Router ID)
+      Extended Community: RT:64521:10010 ET:8
+      Last update: Sat Jul 24 16:30:59 2021
+  Route [2]:[0]:[48]:[00:50:79:66:68:06] VNI 10010
+  65550 64521
+    1.1.1.1 from Spine2(swp2) (22.22.22.22)
+      Origin IGP, valid, external
+      Extended Community: RT:64521:10010 ET:8
+      Last update: Sat Jul 24 16:30:59 2021
+</code></pre></div>
+<p>The MAC address table also shows this entry, against a remote VTEP of 1.1.1.1, which is Leaf1. </p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net show bridge macs 00:50:79:66:68:06
+
+VLAN      Master  Interface  MAC                TunnelDest  State  Flags               LastSeen
+--------  ------  ---------  -----------------  ----------  -----  ------------------  --------
+10        bridge  vni10      00:50:79:66:68:06                     extern_learn        00:00:09
+untagged          vni10      00:50:79:66:68:06  1.1.1.1            self, extern_learn  00:00:09
+</code></pre></div>
+<h3 id="adding-manual-rts">Adding manual RTs</h3>
+<p>Let's add a manual export RT for VNI 10010, on Leaf1:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net add bgp l2vpn evpn vni 10010 route-target export 1:10010
+cumulus@Leaf1:mgmt:~$ net commit
+</code></pre></div>
+<p>This is correctly added to the prefix that is being advertised via BGP EVPN:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show bgp l2vpn evpn route type 2
+BGP table version is 9, local router ID is 1.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal
+Origin codes: i - IGP, e - EGP, ? - incomplete
+EVPN type-1 prefix: [1]:[ESI]:[EthTag]:[IPlen]:[VTEP-IP]:[Frag-id]
+EVPN type-2 prefix: [2]:[EthTag]:[MAClen]:[MAC]:[IPlen]:[IP]
+EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
+EVPN type-4 prefix: [4]:[ESI]:[IPlen]:[OrigIP]
+EVPN type-5 prefix: [5]:[EthTag]:[IPlen]:[IP]
+
+   Network          Next Hop            Metric LocPrf Weight Path
+                    Extended Community
+Route Distinguisher: 1.1.1.1:2
+*&gt; [2]:[0]:[48]:[00:50:79:66:68:06]
+                    1.1.1.1                            32768 i
+                    ET:8 RT:1:10010
+
+Displayed 1 prefixes (1 paths) (of requested type)
+</code></pre></div>
+<p>Leaf2 is still importing this though - why, and how?</p>
+<div class="highlight"><pre><span></span><code>// BGP EVPN table
+
+cumulus@Leaf2:mgmt:~$ net show bgp l2vpn evpn route type 2 
+BGP table version is 9, local router ID is 2.2.2.2
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal
+Origin codes: i - IGP, e - EGP, ? - incomplete
+EVPN type-1 prefix: [1]:[ESI]:[EthTag]:[IPlen]:[VTEP-IP]:[Frag-id]
+EVPN type-2 prefix: [2]:[EthTag]:[MAClen]:[MAC]:[IPlen]:[IP]
+EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
+EVPN type-4 prefix: [4]:[ESI]:[IPlen]:[OrigIP]
+EVPN type-5 prefix: [5]:[EthTag]:[IPlen]:[IP]
+
+   Network          Next Hop            Metric LocPrf Weight Path
+                    Extended Community
+Route Distinguisher: 1.1.1.1:2
+*&gt; [2]:[0]:[48]:[00:50:79:66:68:06]
+                    1.1.1.1                                0 65550 64521 i
+                    RT:1:10010 ET:8
+*  [2]:[0]:[48]:[00:50:79:66:68:06]
+                    1.1.1.1                                0 65550 64521 i
+                    RT:1:10010 ET:8
+
+Displayed 1 prefixes (2 paths) (of requested type) 
+
+// MAC address table
+
+cumulus@Leaf2:mgmt:~$ net show bridge macs 00:50:79:66:68:06
+
+VLAN      Master  Interface  MAC                TunnelDest  State  Flags               LastSeen
+--------  ------  ---------  -----------------  ----------  -----  ------------------  --------
+10        bridge  vni10      00:50:79:66:68:06                     extern_learn        00:03:14
+untagged          vni10      00:50:79:66:68:06  1.1.1.1            self, extern_learn  00:03:14
+</code></pre></div>
+<p>This is the first important thing to remember with auto-derived RTs on Cumulus Linux - there is an implicit *:VNI import when using auto-RTs. This is necessary because when you follow an eBGP peering model, the AS numbers will naturally be different and a ASN:VNI import model will not work when using your own ASN for the import RT. </p>
+<p>Let's add a manual, incorrect RT now on Leaf2:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net add bgp l2vpn evpn vni 10010 route-target import 1:10
+cumulus@Leaf2:mgmt:~$ net commit
+</code></pre></div>
+<p>We no longer see the entry in the MAC address table anymore, even though BGP EVPN has received it:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net show bridge macs 00:50:79:66:68:06                   
+
+VLAN  Master  Interface  MAC  TunnelDest  State  Flags  LastSeen
+----  ------  ---------  ---  ----------  -----  -----  --------
+* no output *
+
+cumulus@Leaf2:mgmt:~$ net show bgp l2vpn evpn route type 2 
+BGP table version is 11, local router ID is 2.2.2.2
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal
+Origin codes: i - IGP, e - EGP, ? - incomplete
+EVPN type-1 prefix: [1]:[ESI]:[EthTag]:[IPlen]:[VTEP-IP]:[Frag-id]
+EVPN type-2 prefix: [2]:[EthTag]:[MAClen]:[MAC]:[IPlen]:[IP]
+EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
+EVPN type-4 prefix: [4]:[ESI]:[IPlen]:[OrigIP]
+EVPN type-5 prefix: [5]:[EthTag]:[IPlen]:[IP]
+
+   Network          Next Hop            Metric LocPrf Weight Path
+                    Extended Community
+Route Distinguisher: 1.1.1.1:2
+*&gt; [2]:[0]:[48]:[00:50:79:66:68:06]
+                    1.1.1.1                                0 65550 64521 i
+                    RT:1:10010 ET:8
+*  [2]:[0]:[48]:[00:50:79:66:68:06]
+                    1.1.1.1                                0 65550 64521 i
+                    RT:1:10010 ET:8
+
+Displayed 1 prefixes (2 paths) (of requested type) 
+</code></pre></div>
+<p>Once we add the correct RT to be imported, we see it in the mac table again:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net add bgp l2vpn evpn vni 10010 route-target import 1:10010
+cumulus@Leaf2:mgmt:~$ net commit
+
+cumulus@Leaf2:mgmt:~$ net show bridge macs 00:50:79:66:68:06
+
+VLAN      Master  Interface  MAC                TunnelDest  State  Flags               LastSeen
+--------  ------  ---------  -----------------  ----------  -----  ------------------  --------
+10        bridge  vni10      00:50:79:66:68:06                     extern_learn        00:00:17
+untagged          vni10      00:50:79:66:68:06  1.1.1.1            self, extern_learn  00:00:17 
+</code></pre></div>
+<p>Remember, this import RT also controls what is inserted into the EVPN ARP cache. Assuming corresponding SVIs were deployed as well, you should see the EVPN ARP cache populated with this entry if the correct import RTs are configured (via the type-2 MAC plus IP route).</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf2:mgmt:~$ net show evpn arp-cache vni 10010
+Number of ARPs (local and remote) known for this VNI: 2
+Flags: I=local-inactive, P=peer-active, X=peer-proxy
+Neighbor        Type   Flags State    MAC               Remote ES/VTEP                 Seq #&#39;s
+10.10.10.101    remote       active   00:50:79:66:68:06 1.1.1.1                        0/0
+10.10.10.102    local        active   00:50:79:66:68:07                                0/0  
+</code></pre></div>
+<h2 id="rts-with-symmetric-irb">RTs with symmetric IRB</h2>
+<p>Let's now convert our network to a symmetric IRB topology. Server2 is moved to VLAN 20, with an IP address of 20.20.20.102. VLANs 10 and 20 are present on both Leaf1 and Leaf2, acting as anycast gateways for their respective subnets. </p>
+<p><img alt="rt2" src="/static/images/cumulus/cumulus_part9/cumulus_RTs_2.jpg" /></p>
+<p>Both Leaf1 and Leaf2 have VNIs created for VLANs 10 and 20. Example below from Leaf1:</p>
+<div class="highlight"><pre><span></span><code>interface vni10
+  bridge-access 10
+  mstpctl-bpduguard yes
+  mstpctl-portbpdufilter yes
+  vxlan-id 10010
+  vxlan-local-tunnelip 1.1.1.1
+
+interface vni20
+  bridge-access 20
+  mstpctl-bpduguard yes
+  mstpctl-portbpdufilter yes
+  vxlan-id 10020
+  vxlan-local-tunnelip 1.1.1.1
+</code></pre></div>
+<p>A L3VNI (VNI 10040) is created for symmetric routing and mapped to VLAN 40. Each of the servers are moved into a new VRF, called VRF1. The L3VNI is mapped to this VRF as well. </p>
+<div class="highlight"><pre><span></span><code>interface vlan10
+  address 10.10.10.1/24
+  hwaddress 00:10:00:10:00:10
+  vlan-id 10
+  vlan-raw-device bridge
+  vrf VRF1
+
+interface vlan20
+  address 20.20.20.1/24
+  hwaddress 00:20:00:20:00:20
+  vlan-id 20
+  vlan-raw-device bridge
+  vrf VRF1
+
+interface vlan40
+  vlan-id 40
+  vlan-raw-device bridge
+  vrf VRF1
+</code></pre></div>
+<p>The same import RT logic applies for L3VNIs also - if there's no manual import configured for the L3VNI, then the default *:VNI import is applied. It is crucial to understand how the import/export RTs for the L3VNI is controlled - this is done under the VRF specific address-family in BGP. </p>
+<p>For example, before setting any manual import/export RTs, the L3VNI has auto-derived it:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show bgp l2vpn evpn vni 10040
+VNI: 10040 (known to the kernel)
+  Type: L3
+  Tenant VRF: VRF1
+  RD: 20.20.20.1:3
+  Originator IP: 1.1.1.1
+  Advertise-gw-macip : n/a
+  Advertise-svi-macip : n/a
+  Advertise-pip: Yes
+  System-IP: 1.1.1.1
+  System-MAC: 50:00:00:03:00:03
+  Router-MAC: 50:00:00:03:00:03
+  Import Route Target:
+    64521:10040
+  Export Route Target:
+    64521:10040 
+</code></pre></div>
+<p>We'll now configure this manually instead, as an example, on Leaf1. This goes under the BGP configuration itself:</p>
+<div class="highlight"><pre><span></span><code>net add bgp vrf VRF1 autonomous-system 64521
+net add bgp vrf VRF1 l2vpn evpn route-target import 2:10040
+net add bgp vrf VRF1 l2vpn evpn route-target export 1:10040
+</code></pre></div>
+<p>Notice how these are specific to the VRF. Now, Leaf1 should be adding a RT of 1:10040 to the prefixes.  The final BGP configuration in this case:</p>
+<div class="highlight"><pre><span></span><code>router bgp 64521
+  bgp router-id 1.1.1.1
+  neighbor swp1 interface remote-as external
+  neighbor swp2 interface remote-as external
+
+  address-family ipv4 unicast
+    network 1.1.1.1/32 
+
+  address-family l2vpn evpn
+    neighbor swp1 activate
+    neighbor swp2 activate
+    advertise-all-vni
+
+    vni 10020
+      route-target import 2:10
+      route-target export 2:10
+
+    vni 10010
+      route-target import 1:10
+      route-target export 1:10
+
+router bgp 64521 vrf VRF1
+
+  address-family l2vpn evpn
+    route-target export 1:10040
+    route-target import 2:10040
+</code></pre></div>
+<p>Looking at the BGP EVPN table, we can see the RTs are correctly added:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show bgp l2vpn evpn route rd 1.1.1.1:3 type 2
+EVPN type-1 prefix: [1]:[ESI]:[EthTag]:[IPlen]:[VTEP-IP]:[Frag-id]
+EVPN type-2 prefix: [2]:[EthTag]:[MAClen]:[MAC]
+EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
+EVPN type-4 prefix: [4]:[ESI]:[IPlen]:[OrigIP]
+EVPN type-5 prefix: [5]:[EthTag]:[IPlen]:[IP]
+
+BGP routing table entry for 1.1.1.1:3:[2]:[00:50:79:66:68:06]/352
+Paths: (1 available, best #1)
+  Advertised to non peer-group peers:
+  Spine1(swp1) Spine2(swp2)
+  Route [2]:[0]:[48]:[00:50:79:66:68:06] VNI 10010/10040
+  Local
+    1.1.1.1 from 0.0.0.0 (1.1.1.1)
+      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+      Extended Community: ET:8 RT:1:10 RT:1:10040 Rmac:50:00:00:03:00:03
+      Last update: Fri Jul 30 09:43:56 2021
+BGP routing table entry for 1.1.1.1:3:[2]:[00:50:79:66:68:06]:[10.10.10.101]/352
+Paths: (1 available, best #1)
+  Advertised to non peer-group peers:
+  Spine1(swp1) Spine2(swp2)
+  Route [2]:[0]:[48]:[00:50:79:66:68:06]:[32]:[10.10.10.101] VNI 10010/10040
+  Local
+    1.1.1.1 from 0.0.0.0 (1.1.1.1)
+      Origin IGP, weight 32768, valid, sourced, local, bestpath-from-AS Local, best (First path received)
+      Extended Community: ET:8 RT:1:10 RT:1:10040 Rmac:50:00:00:03:00:03
+      Last update: Fri Jul 30 09:43:56 2021
+
+Displayed 2 prefixes (2 paths) with this RD (of requested type) 
+</code></pre></div>
+<p>There are two distinct RTs added here - one for the corresponding L2VNI and another for the L3VNI. </p>
+<p>It is important to understand the impact of importing each RT - on Leaf2, importing the RT for the L3VNI is what imports the /32 route (from the type-2 MAC plus IP route) into the VRF routing table, while importing the L2VNI will pull the MAC address into the MAC address table (this is done using the type-2 MAC only route) and create an entry in the EVPN ARP cache (using the type-2 MAC plus IP route).</p>
+<p>Let's confirm on Leaf2:</p>
+<div class="highlight"><pre><span></span><code>// MAC address table
+
+cumulus@Leaf2:mgmt:~$ net show bridge macs 00:50:79:66:68:06
+
+VLAN      Master  Interface  MAC                TunnelDest  State  Flags               LastSeen
+--------  ------  ---------  -----------------  ----------  -----  ------------------  --------
+10        bridge  vni10      00:50:79:66:68:06                     extern_learn        00:00:43
+untagged          vni10      00:50:79:66:68:06  1.1.1.1            self, extern_learn  00:00:43
+
+// EVPN ARP cache
+
+cumulus@Leaf2:mgmt:~$ net show evpn arp-cache vni 10010     
+Number of ARPs (local and remote) known for this VNI: 1
+Flags: I=local-inactive, P=peer-active, X=peer-proxy
+Neighbor        Type   Flags State    MAC               Remote ES/VTEP                 Seq #&#39;s
+10.10.10.101    remote       active   00:50:79:66:68:06 1.1.1.1                        0/0 
+
+// VRF1 route table
+
+cumulus@Leaf2:mgmt:~$ net show route vrf VRF1 ipv4          
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR, f - OpenFabric,
+       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF VRF1:
+K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 01:46:41
+C&gt;* 10.10.10.0/24 is directly connected, vlan10, 01:46:41
+B&gt;* 10.10.10.101/32 [20/0] via 1.1.1.1, vlan40 onlink, weight 1, 00:21:36
+C&gt;* 20.20.20.0/24 is directly connected, vlan20, 01:46:41 
+</code></pre></div>
+<p>On Leaf2, as you can see, we have enough information to route both asymmetrically and symmetrically. Remember, the lookup is always a longest prefix match - which means the /32 route is hit and the packet is routed symmetrically. </p>
+<h2 id="controlling-rts">Controlling RTs</h2>
+<p>Knowing what we know of RT import/export, we can fully control how we want our traffic to flow (asymmetric or symmetric).</p>
+<p>On Leaf1, let's import a different RT under the VRF address-family.</p>
+<div class="highlight"><pre><span></span><code>router bgp 64521
+  bgp router-id 1.1.1.1
+  neighbor swp1 interface remote-as external
+  neighbor swp2 interface remote-as external
+
+  address-family ipv4 unicast
+    network 1.1.1.1/32 
+
+  address-family l2vpn evpn
+    neighbor swp1 activate
+    neighbor swp2 activate
+    advertise-all-vni
+
+    vni 10020
+      route-target import 2:10
+      route-target export 2:10
+
+    vni 10010
+      route-target import 1:10
+      route-target export 1:10
+
+router bgp 64521 vrf VRF1
+
+  address-family l2vpn evpn
+    route-target export 1:10040
+    route-target import 2:10041 
+</code></pre></div>
+<p>This causes the type-2 MAC plus IP route to not be imported as a /32 route in the VRF table. Now, the longest prefix match is the subnet route itself:</p>
+<div class="highlight"><pre><span></span><code>cumulus@Leaf1:mgmt:~$ net show route vrf VRF1 ipv4
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR, f - OpenFabric,
+       &gt; - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF VRF1:
+K&gt;* 0.0.0.0/0 [255/8192] unreachable (ICMP unreachable), 07:27:56
+C&gt;* 10.10.10.0/24 is directly connected, vlan10, 07:27:56
+C&gt;* 20.20.20.0/24 is directly connected, vlan20, 07:27:56 
+</code></pre></div>
+<p>This means that the destination is directly connected to Leaf1 and it can ARP for it. Using the EVPN ARP cache, Leaf1 already knows PC2s mac address, and there's no need to ARP for it again. Thus, PC1 to PC2, traffic will flow asymmetrically. A packet capture confirms that the VNI added to the VXLAN header is 10020.</p>
+<p><img alt="rt3" src="/static/images/cumulus/cumulus_part9/cumulus_RTs_3.jpg" /></p>
+<p>The return path is symmetric because Leaf2 still has that /32 entry imported into the VRF table. A packet capture confirms that the return packet has the L3VNI (10040) added to the VXLAN header. </p>
+<p><img alt="rt4" src="/static/images/cumulus/cumulus_part9/cumulus_RTs_4.jpg" /></p>
+<p>I hope this was informative, and I'll see you in the next one.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/aninchat/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/aninchat" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.top", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "search.suggest", "search.highlight", "content.code.annotate", "content.tooltips", "toc.integrate", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>
