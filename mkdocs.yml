@@ -1,7 +1,7 @@
 site_name: The ASCII Construct
 site_url: https://www.theasciiconstruct.com/
-repo_name: hellt/netdevops.me
-repo_url: https://github.com/hellt/netdevops.me
+repo_name: aninchat/mkdocs-theasciiconstruct
+repo_url: https://github.com/aninchat/mkdocs-theasciiconstruct
 extra_css:
   - stylesheets/extra.css
 extra:
