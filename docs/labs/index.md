@@ -6,5 +6,5 @@ hide:
 
 # Learning labs
 
-!!! info
-    Labs are in the process of being built
+!!! warning "Under construction"
+    Labs are in the process of being built.
