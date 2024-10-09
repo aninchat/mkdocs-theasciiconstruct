@@ -12,3 +12,9 @@ I am a published author, having written the book *Deploying Juniper Data Centers
 You can also support the work on this website and its upkeep with buy me a coffee:
 
 <a href="https://buymeacoffee.com/aninchat"><img src=/static/images/bmc-button.png width=200></a>
+
+!!! info "Site Navigation"
+    While this site mostly functions as a peronal technical blog, I have also curated a list of reference learning material that I use most often, which, in general, should as excellent resources for other engineers. In addition to this, there are labs under construction as well, deployed using containerlab, predominatenly to help learn data center technologies and solutions.<br><br>
+    [Blog](/blog/)<br>
+    [Learning references](/references/)<br>
+    [Labs](labs/)<br>

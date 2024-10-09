@@ -35,19 +35,19 @@ theme:
   palette:
     # Palette toggle for light mode
     - scheme: default
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
+      # toggle:
+      #   icon: material/weather-night
+      #   name: Switch to dark mode
       primary: white
       accent: cyan
 
-    # Palette toggle for dark mode
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
-      primary: black
-      accent: cyan
+    # # Palette toggle for dark mode
+    # - scheme: slate
+    #   toggle:
+    #     icon: material/weather-sunny
+    #     name: Switch to light mode
+    #   primary: black
+    #   accent: cyan
 plugins:
   - blog:
       post_excerpt: optional
