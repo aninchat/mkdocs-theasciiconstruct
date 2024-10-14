@@ -26,7 +26,7 @@ This post dives deeper into the asymmetric routing model on SR Linux. The topolo
 
 The physical topology is shown below:
 
-![srlinux-asymm-1](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-1.png)
+![srlinux-asymm-1](https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png)
 
 <!-- more -->
 
@@ -119,7 +119,7 @@ When routing between VNIs, in a VXLAN fabric, there are two major routing models
 
 Such a design naturally implies that both the source and the destination IRBs (and the corresponding Layer 2 domains and bridge tables) must exist on all leafs hosting servers that need to communicate with each other. While this increases the operational state on the leafs themselves (ARP state and MAC address state is stored everywhere), it does offer configuration and operational simplicity.
 
-![srlinux-asymm-2](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-2.png)
+![srlinux-asymm-2](https://gitlab.com/aninchat1/images/-/wikis/uploads/f93957318e62633db1c8603dbef57b69/srlinux-asymmetric-2.png)
 
 ## Configuration walkthrough
 
@@ -658,7 +658,7 @@ The BGP configuration defines a peer-group called `spine` on the leafs and `leaf
 
 The following packet capture also confirms the MP-BGP capabilities exchanged with the BGP OPEN messages, where both IPv4 unicast and L2VPN EVPN capabilities are advertised:
 
-![srlinux-asymm-3](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-3.png)
+![srlinux-asymm-3](https://gitlab.com/aninchat1/images/-/wikis/uploads/a55a3e47da51d29386b372c2a1a790ee/srlinux-asymmetric-3.png)
 
 ### Routing policies for the underlay and overlay
 
@@ -1584,7 +1584,7 @@ Let's consider two flows to understand the data plane forwarding in such a desig
 
 Since h1 is in the same subnet as h2, when communicating with h2, h1 will try to resolve its IP address directly via an ARP request. This is received on leaf1 and leaked to the CPU via `irb0.10`. Since L2 proxy-arp is not enabled, the `arp_nd_mgr` process picks up the ARP request and responds back using its own anycast gateway MAC address while suppressing the ARP request from being flooded in the fabric. A packet capture of this ARP reply is shown below.
 
-![srlinux-asymm-3](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-4.png)
+![srlinux-asymm-4](https://gitlab.com/aninchat1/images/-/wikis/uploads/bc7ebec1d9e45487dead1d77849f09c2/srlinux-asymmetric-4.png)
 
 Once this ARP process completes, host h1 generates an ICMP request (since we are testing communication between hosts using the `ping` tool). When this IP packet arrives on leaf1, it does a routing lookup (since the destination MAC address is owned by itself) and this routing lookup will either hit the 172.16.10.0/24 prefix or the more-specific 172.16.10.2/32 prefix (installed from the ARP entry via the EVPN Type-2 MAC+IP route), as shown below. Since this is a directly attached route, it is further resolved into a MAC address via the ARP table and then the packet is bridged towards the destination. This MAC address points to an Ethernet Segment, which in turn resolves into VTEPs 192.0.2.12 and 192.0.2.13.
 
@@ -1647,7 +1647,7 @@ Ethernet Segment Destinations
 
 A packet capture of the in-flight packet (as leaf1 sends it to spine1) is shown below, which confirms that the packet ICMP request is VXLAN-encapsulated with a VNI of 10010. It also confirms that because of the L3 proxy-arp approach to suppressing ARPs in an EVPN VXLAN fabric, the source MAC address in the inner Ethernet header is the anycast gateway MAC address.
 
-![srlinux-asymm-4](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-5.png)
+![srlinux-asymm-5](https://gitlab.com/aninchat1/images/-/wikis/uploads/2aba126b6ddb1c4c37d4be11d125c1c6/srlinux-asymmetric-5.png)
 
 The communication between host h1 and h3 follows a similar pattern - the packet is received in macvrf1, mapped VNI 10010, and since the destination MAC address is the anycast MAC address owned by leaf1, it is then routed locally into VNI 10020 (since `irb0.20` is locally attached) and then bridged across to the destination, as confirmed below:
 
@@ -1692,7 +1692,7 @@ Hold down time remaining: N/A
 
 The following packet capture confirms that the in-flight packet has been routed on the ingress leaf itself (leaf1) and the VNI, in the VXLAN header, is 10020.
 
-![srlinux-asymm-5](/static/images/nokia/srlinux-asymmetric/srlinux-asymmetric-6.png)
+![srlinux-asymm-5](https://gitlab.com/aninchat1/images/-/wikis/uploads/4dad44354646d9f1c32a73d88c8f7da8/srlinux-asymmetric-6.png)
 
 ## Summary
 
