@@ -15,6 +15,11 @@ extra:
     property: G-KE4X74VVDE
 theme:
   name: material
+  icon:
+    admonition:
+      note: fontawesome/solid/note-sticky
+      example: fontawesome/solid/flask
+      tip: fontawesome/solid/bullhorn
   custom_dir: overrides
   logo: assets/dbc_3334.png
   features:
@@ -31,7 +36,7 @@ theme:
     - navigation.indexes
   font:
     text: Syne Mono
-    code: Fira Code
+    code: Fira Mono
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -68,6 +73,8 @@ plugins:
         - multivendor
         - sda
         - lisp
+        - srlinux
+        - nokia
   - search
   - tags
 nav:
@@ -80,8 +87,12 @@ nav:
       - labs/index.md
 markdown_extensions:
   - attr_list
+  - tables
+  - def_list
   - admonition
   - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -89,6 +100,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg

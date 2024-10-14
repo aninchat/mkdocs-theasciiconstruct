@@ -2,230 +2,230 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.theasciiconstruct.com/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/05/cumulus-basics-part-i---navigating-the-os/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/07/cumulus-part-ii---bridging/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/09/cumulus-basics-part-iv---bgp-introduction/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/10/cumulus-basics-part-v---bgp-unnumbered/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/11/cumulus-basics-part-vi---vxlan-l2vnis-with-bgp-evpn/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/12/cumulus-basics-part-vii---vxlan-routing---asymmetric-irb/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/08/cumulus-basics-part-iii---static-routing-and-ospf/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/13/cumulus-basics-part-viii---vxlan-symmetric-routing-and-multi-tenancy/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/15/cumulus-part-x---vxlan-evpn-and-mlag/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/14/cumulus-part-ix---understanding-vxlan-evpn-route-target-control/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/06/30/juniper-apstra-part-i---introducing-a-true-ibns/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/07/10/juniper-apstra-part-ii---building-a-data-center-rack/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/02/16/junos-part-ii---bgp-and-bgp-unnumbered/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/24/junos-part-i---the-basics/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/24/juniper-vqfx-and-containerlab/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/03/12/multi-vendor-evpn-vxlan-setup-with-containerlab/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/12/18/ciscos-nxos-evpn-hybrid-mode---interoperability-with-asymmetric-vteps/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/25/cisco-sda-part-i---introduction-to-lisp-and-its-basic-terminology/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/04/cisco-sda-part-x---understanding-l2-handoff/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/05/cisco-sda-part-xi---understanding-arp-in-sda/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/06/cisco-sda-part-xii---bsr-auto-rp-for-the-fabric-and-a-catch-22/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/26/cisco-sda-part-ii---basic-lisp-configuration-and-operation/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/27/cisco-sda-part-iii---lisp-and-non-lisp-sites/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/28/cisco-sda-part-iv---lisp-mobility---dynamic-eids/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/29/cisco-sda-part-v---lisp-mobility---roaming-hosts/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2021/12/30/cisco-sda-part-vi---lisp-mobility---solicit-map-requests-smrs/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/01/cisco-sda-part-vii---multi-instance-lisp/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/02/cisco-sda-part-viii---dhcp-challenges-in-sda/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/2022/01/03/cisco-sda-part-ix---need-for-duplicate-ips-on-fabric-borders/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/labs/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/references/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/archive/2022/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/archive/2021/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/containerlab/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/junos/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/bgp/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/evpn/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/vxlan/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/cisco/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/nxos/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/multivendor/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/juniper/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/apstra/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/cumulus/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/arista/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/sda/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/lisp/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/mlag/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/page/3/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/archive/2022/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/archive/2021/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/cumulus/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/lisp/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
     <url>
          <loc>https://www.theasciiconstruct.com/blog/category/sda/page/2/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-12</lastmod>
     </url>
 </urlset>
