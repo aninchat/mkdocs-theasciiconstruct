@@ -4,7 +4,7 @@ date:
   updated: 2024-10-09
 authors:
     - aninchat
-draft: true
+draft: false
 blog_toc: true
 categories:
   - containerlab
