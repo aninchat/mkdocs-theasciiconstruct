@@ -26,7 +26,8 @@ This post dives deeper into the asymmetric routing model on SR Linux. The topolo
 
 The physical topology is shown below:
 
-![srlinux-asymm-1](https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png)
+<img src = "https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png">
+
 
 <!-- more -->
 
