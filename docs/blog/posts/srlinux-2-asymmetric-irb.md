@@ -30,6 +30,107 @@ The physical topology is shown below:
 
 <!-- more -->
 
+The Containerlab file used for this is shown below:
+
+```
+name: asymmetric-routing-srlinux
+
+topology:
+  nodes:
+    spine1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    spine2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    leaf1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    leaf2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    leaf3:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    leaf4:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux
+    h1:
+      kind: linux
+      image: aninchat/host:v1
+      binds:
+        - hosts/h1_interfaces:/etc/network/interfaces
+    h2:
+      kind: linux
+      image: aninchat/host:v1
+      binds:  
+        - hosts/h2_interfaces:/etc/network/interfaces
+    h3:
+      kind: linux
+      image: aninchat/host:v1
+      binds:
+        - hosts/h3_interfaces:/etc/network/interfaces
+  links:
+    - endpoints: ["leaf1:e1-1", "spine1:e1-1"]
+    - endpoints: ["leaf1:e1-2", "spine2:e1-1"]
+    - endpoints: ["leaf2:e1-1", "spine1:e1-2"]
+    - endpoints: ["leaf2:e1-2", "spine2:e1-2"]
+    - endpoints: ["leaf3:e1-1", "spine1:e1-3"]
+    - endpoints: ["leaf3:e1-2", "spine2:e1-3"]
+    - endpoints: ["leaf4:e1-1", "spine1:e1-4"]
+    - endpoints: ["leaf4:e1-2", "spine2:e1-4"]
+    - endpoints: ["leaf1:e1-3", "h1:eth1"]
+    - endpoints: ["leaf2:e1-3", "h2:eth1"]
+    - endpoints: ["leaf3:e1-3", "h2:eth2"]
+    - endpoints: ["leaf4:e1-3", "h3:eth1"]
+```
+
+And the interface configuration for the hosts is as follows:
+
+=== "h1"
+```
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+    address 172.16.10.1
+    netmask 255.255.255.0
+```
+=== "h2"
+```
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+
+auto eth2
+iface eth1 inet static
+
+auto bond
+iface bond inet static
+  address 172.16.10.2
+  netmask 255.255.255.0
+  mtu 9000
+  bond-slaves eth1 eth2
+  bond-mode 802.3ad
+  bond-miimon 100
+  bond-lacp-rate 1
+  bond-min-links 1
+  bond-xmit-hash-policy layer3+4
+```
+=== "h3"
+```
+auto lo
+iface lo inet loopback
+
+auto eth1
+iface eth1 inet static
+    address 172.16.20.3
+    netmask 255.255.255.0
+```
+
 The end goal of this post is to ensure that host h1 can communicate with both h2 (same subnet) and h3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):
 
 | Resource                              | IPv4 scope                    |
