@@ -33,7 +33,7 @@ The physical topology is shown below:
 The Containerlab file used for this is shown below:
 
 ```
-name: asymmetric-routing-srlinux
+name: srlinux-asymmetric-routing
 
 topology:
   nodes:
@@ -57,19 +57,30 @@ topology:
       image: ghcr.io/nokia/srlinux
     h1:
       kind: linux
-      image: aninchat/host:v1
-      binds:
-        - hosts/h1_interfaces:/etc/network/interfaces
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip addr add 172.16.10.1/24 dev eth1
+        - ip route add 172.16.20.0/24 via 172.16.10.254
     h2:
       kind: linux
-      image: aninchat/host:v1
-      binds:  
-        - hosts/h2_interfaces:/etc/network/interfaces
+      image: ghcr.io/srl-labs/network-multitool
+      exec:  
+        - ip link add bond0 type bond mode 802.3ad
+        - ip link set eth1 down 
+        - ip link set eth2 down 
+        - ip link set eth1 master bond0
+        - ip link set eth2 master bond0
+        - ip addr add 172.16.10.2/24 dev bond0
+        - ip link set eth1 up
+        - ip link set eth2 up
+        - ip link set bond0 up
+        - ip route add 172.16.20.0/24 via 172.16.10.254
     h3:
       kind: linux
-      image: aninchat/host:v1
-      binds:
-        - hosts/h3_interfaces:/etc/network/interfaces
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip addr add 172.16.20.3/24 dev eth1
+        - ip route add 172.16.10.0/24 via 172.16.20.254
   links:
     - endpoints: ["leaf1:e1-1", "spine1:e1-1"]
     - endpoints: ["leaf1:e1-2", "spine2:e1-1"]
@@ -85,51 +96,8 @@ topology:
     - endpoints: ["leaf4:e1-3", "h3:eth1"]
 ```
 
-And the interface configuration for the hosts is as follows:
-
-=== "h1"
-    ```
-    auto lo
-    iface lo inet loopback
-
-    auto eth1
-    iface eth1 inet static
-        address 172.16.10.1
-        netmask 255.255.255.0
-    ```
-=== "h2"
-    ```
-    auto lo
-    iface lo inet loopback
-
-    auto eth1
-    iface eth1 inet static
-
-    auto eth2
-    iface eth1 inet static
-
-    auto bond
-    iface bond inet static
-    address 172.16.10.2
-    netmask 255.255.255.0
-    mtu 9000
-    bond-slaves eth1 eth2
-    bond-mode 802.3ad
-    bond-miimon 100
-    bond-lacp-rate 1
-    bond-min-links 1
-    bond-xmit-hash-policy layer3+4
-    ```
-=== "h3"
-    ```
-    auto lo
-    iface lo inet loopback
-
-    auto eth1
-    iface eth1 inet static
-        address 172.16.20.3
-        netmask 255.255.255.0
-    ```
+???+ note
+    The host (image used is `ghcr.io/srl-labs/network-multitool`) login credentials are user/multit00l.
 
 The end goal of this post is to ensure that host h1 can communicate with both h2 (same subnet) and h3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):
 
