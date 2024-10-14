@@ -22,11 +22,11 @@ tags:
   - nokia
 ---
 # Asymmetric routing with SR Linux in EVPN VXLAN fabrics 
-This post dives deeper into the asymmetric routing model on SR Linux. The topology in use is a 3-stage Clos fabric with BGP EVPN and VXLAN, with host h1 single-homed to leaf1, h2 dual-homed to leaf2 and leaf3 and h3 single-homed to leaf4. Hosts h1 and h2 are in the same subnet, 172.16.10.0/24 while h3 is in a different subnet, 172.16.20.0/24. Thus, this post demonstrates Layer 2 extension over a routed fabric as well as how Layer 3 services are deployed over the same fabric, with an asymmetric routing model. 
+This post dives deeper into the asymmetric routing model on SR Linux. The topology in use is a 3-stage Clos fabric with BGP EVPN and VXLAN, with server s1 single-homed to leaf1, s2 dual-homed to leaf2 and leaf3 and s3 single-homed to leaf4. Hosts s1 and s2 are in the same subnet, 172.16.10.0/24 while s3 is in a different subnet, 172.16.20.0/24. Thus, this post demonstrates Layer 2 extension over a routed fabric as well as how Layer 3 services are deployed over the same fabric, with an asymmetric routing model. 
 
 The physical topology is shown below:
 
-<img src = "https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png">
+![srlinux-asymm-1](https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png)
 
 
 <!-- more -->
@@ -40,29 +40,29 @@ topology:
   nodes:
     spine1:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.1
     spine2:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.1
     leaf1:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.1
     leaf2:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.1
     leaf3:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.1
     leaf4:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
-    h1:
+      image: ghcr.io/nokia/srlinux:24.7.1
+    s1:
       kind: linux
       image: ghcr.io/srl-labs/network-multitool
       exec:
         - ip addr add 172.16.10.1/24 dev eth1
         - ip route add 172.16.20.0/24 via 172.16.10.254
-    h2:
+    s2:
       kind: linux
       image: ghcr.io/srl-labs/network-multitool
       exec:  
@@ -76,7 +76,7 @@ topology:
         - ip link set eth2 up
         - ip link set bond0 up
         - ip route add 172.16.20.0/24 via 172.16.10.254
-    h3:
+    s3:
       kind: linux
       image: ghcr.io/srl-labs/network-multitool
       exec:
@@ -91,16 +91,16 @@ topology:
     - endpoints: ["leaf3:e1-2", "spine2:e1-3"]
     - endpoints: ["leaf4:e1-1", "spine1:e1-4"]
     - endpoints: ["leaf4:e1-2", "spine2:e1-4"]
-    - endpoints: ["leaf1:e1-3", "h1:eth1"]
-    - endpoints: ["leaf2:e1-3", "h2:eth1"]
-    - endpoints: ["leaf3:e1-3", "h2:eth2"]
-    - endpoints: ["leaf4:e1-3", "h3:eth1"]
+    - endpoints: ["leaf1:e1-3", "s1:eth1"]
+    - endpoints: ["leaf2:e1-3", "s2:eth1"]
+    - endpoints: ["leaf3:e1-3", "s3:eth2"]
+    - endpoints: ["leaf4:e1-3", "s3:eth1"]
 ```
 
 ???+ note
-    The host (image used is `ghcr.io/srl-labs/network-multitool`) login credentials are user/multit00l.
+    The server/host (image used is `ghcr.io/srl-labs/network-multitool`) login credentials is `user/multit00l`.
 
-The end goal of this post is to ensure that host h1 can communicate with both h2 (same subnet) and h3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):
+The end goal of this post is to ensure that host s1 can communicate with both s2 (same subnet) and s3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):
 
 | Resource                              | IPv4 scope                    |
 | :------------------------------------:|:---------------------------:|
@@ -108,9 +108,9 @@ The end goal of this post is to ensure that host h1 can communicate with both h2
 | `system0` interface                   | 192.0.2.0/24                  |
 | VNI 10010                             | 172.16.10.0/24                |
 | VNI 10020                             | 172.16.20.0/24                |
-| host h1                               | 172.16.10.1/24                |
-| host h2                               | 172.16.10.2/24                |
-| host h3                               | 172.16.20.3/24                |
+| server s1                             | 172.16.10.1/24                |
+| server s2                             | 172.16.10.2/24                |
+| server s3                             | 172.16.20.3/24                |
 | `irb0.10` interface                   | 172.16.10.254/24              |
 | `irb0.20` interface                   | 172.16.20.254/24              |
 
@@ -799,7 +799,7 @@ The configuration of the routing policies used for export and import of BGP rout
 
 ### Host connectivity and ESI LAG
 
-With BGP configured, we can start to deploy the connectivity to the servers and configure the necessary VXLAN constructs for end-to-end connectivity. The interfaces, to the servers, are configured as untagged interfaces. Since host h2 is multi-homed to leaf2 and leaf3, this segment is configured as an ESI LAG. This includes:
+With BGP configured, we can start to deploy the connectivity to the servers and configure the necessary VXLAN constructs for end-to-end connectivity. The interfaces, to the servers, are configured as untagged interfaces. Since server s2 is multi-homed to leaf2 and leaf3, this segment is configured as an ESI LAG. This includes:
 
 1. Mapping the physical interface to a LAG interface (`lag1`, in this case).
 2. The LAG interface configured with the required LACP properties - mode `active` and a system-mac of `00:00:00:00:23:23`. This LAG interface is also configured with a subinterface of type `bridged`.
@@ -944,7 +944,7 @@ With BGP configured, we can start to deploy the connectivity to the servers and 
 
 ### VXLAN tunnel interfaces
 
-On each leaf, VXLAN tunnel-interfaces are created next. In this case, two logical interfaces are created, one for VNI 10010 and another for VNI 10020 (since this is asymmetric routing, all VNIs must exist on all leafs that want to route between the respective VNIs). Since the end-goal is to have host h1 communicate with h2 and h3, only leaf1 and leaf4 are configured with VNI 10020 as well, while leaf2 and leaf3 are only configured with VNI 10010. 
+On each leaf, VXLAN tunnel-interfaces are created next. In this case, two logical interfaces are created, one for VNI 10010 and another for VNI 10020 (since this is asymmetric routing, all VNIs must exist on all leafs that want to route between the respective VNIs). Since the end-goal is to have server s1 communicate with s2 and s3, only leaf1 and leaf4 are configured with VNI 10020 as well, while leaf2 and leaf3 are only configured with VNI 10010. 
 
 === "leaf1"
     ```
@@ -1455,7 +1455,7 @@ This completes the configuration walkthrough section of this post. Next, we'll c
 
 When the hosts come online, they typically send a GARP to ensure there is no duplicate IP address in their broadcast domain. This enables the locally attached leafs to learn the IP-to-MAC binding and build an ARP entry in the ARP cache table (since the `arp learn-unsolicited` configuration option is set to `true`). This, in turn, is advertised as an EVPN Type-2 MAC+IP route for remote leafs to learn this as well and eventually insert the IP-to-MAC binding as an entry in their ARP caches. 
 
-On leaf1, we can confirm that it has learnt the IP-to-MAC binding for host h1 (locally attached) and h3 (attached to remote leaf, leaf4). 
+On leaf1, we can confirm that it has learnt the IP-to-MAC binding for server s1 (locally attached) and s3 (attached to remote leaf, leaf4). 
 
 ```
 A:leaf1# show arpnd arp-entries interface irb0
@@ -1472,7 +1472,7 @@ A:leaf1# show arpnd arp-entries interface irb0
 --{ + candidate shared default }--[  ]--
 ```
 
-The ARP entry for host h3 (172.16.20.3) is learnt via the EVPN Type-2 MAC+IP route received from leaf4, as shown below.
+The ARP entry for server s3 (172.16.20.3) is learnt via the EVPN Type-2 MAC+IP route received from leaf4, as shown below.
 
 ```
 --{ + running }--[  ]--
@@ -1535,7 +1535,7 @@ Received paths     : 1
 --{ + running }--[  ]--
 ```
 
-This is an important step for asymmetric routing. Consider a situation where host h1 wants to communicate with h3. When the IP packet hits leaf1, it will attempt to resolve the destination IP address via an ARP request, as it is directly attached locally (via the `irb.20` interface), as shown below. 
+This is an important step for asymmetric routing. Consider a situation where server s1 wants to communicate with s3. When the IP packet hits leaf1, it will attempt to resolve the destination IP address via an ARP request, as it is directly attached locally (via the `irb.20` interface), as shown below. 
 
 ```
 --{ + running }--[  ]--
@@ -1581,13 +1581,13 @@ IPv4 unicast route table of network instance default
 
     The `arp host-route populate evpn` configuration option is purely a design choice. Since a routing lookup is based on the longest-prefix-match logic (where the longest prefix wins), the existence of the host routes ensure that when there is a routing lookup for the destination, the host route is selected instead of falling back to the subnet route, which relies on ARP resolution, making the forwarding process more efficient. However, this also implies that a host route is created for every EVPN-learnt ARP entry, which can lead to a large routing table, potentially creating an issue in large-scale fabrics.
 
-Let's consider two flows to understand the data plane forwarding in such a design - host h1 communicating with h2 (same subnet) and h1 communicating with h3 (different subnet). 
+Let's consider two flows to understand the data plane forwarding in such a design - server s1 communicating with s2 (same subnet) and s1 communicating with s3 (different subnet). 
 
-Since h1 is in the same subnet as h2, when communicating with h2, h1 will try to resolve its IP address directly via an ARP request. This is received on leaf1 and leaked to the CPU via `irb0.10`. Since L2 proxy-arp is not enabled, the `arp_nd_mgr` process picks up the ARP request and responds back using its own anycast gateway MAC address while suppressing the ARP request from being flooded in the fabric. A packet capture of this ARP reply is shown below.
+Since s1 is in the same subnet as s2, when communicating with s2, s1 will try to resolve its IP address directly via an ARP request. This is received on leaf1 and leaked to the CPU via `irb0.10`. Since L2 proxy-arp is not enabled, the `arp_nd_mgr` process picks up the ARP request and responds back using its own anycast gateway MAC address while suppressing the ARP request from being flooded in the fabric. A packet capture of this ARP reply is shown below.
 
 ![srlinux-asymm-4](https://gitlab.com/aninchat1/images/-/wikis/uploads/bc7ebec1d9e45487dead1d77849f09c2/srlinux-asymmetric-4.png)
 
-Once this ARP process completes, host h1 generates an ICMP request (since we are testing communication between hosts using the `ping` tool). When this IP packet arrives on leaf1, it does a routing lookup (since the destination MAC address is owned by itself) and this routing lookup will either hit the 172.16.10.0/24 prefix or the more-specific 172.16.10.2/32 prefix (installed from the ARP entry via the EVPN Type-2 MAC+IP route), as shown below. Since this is a directly attached route, it is further resolved into a MAC address via the ARP table and then the packet is bridged towards the destination. This MAC address points to an Ethernet Segment, which in turn resolves into VTEPs 192.0.2.12 and 192.0.2.13.
+Once this ARP process completes, server s1 generates an ICMP request (since we are testing communication between hosts using the `ping` tool). When this IP packet arrives on leaf1, it does a routing lookup (since the destination MAC address is owned by itself) and this routing lookup will either hit the 172.16.10.0/24 prefix or the more-specific 172.16.10.2/32 prefix (installed from the ARP entry via the EVPN Type-2 MAC+IP route), as shown below. Since this is a directly attached route, it is further resolved into a MAC address via the ARP table and then the packet is bridged towards the destination. This MAC address points to an Ethernet Segment, which in turn resolves into VTEPs 192.0.2.12 and 192.0.2.13.
 
 ```
 A:leaf1# show network-instance default route-table ipv4-unicast route 172.16.10.2
@@ -1650,7 +1650,7 @@ A packet capture of the in-flight packet (as leaf1 sends it to spine1) is shown 
 
 ![srlinux-asymm-5](https://gitlab.com/aninchat1/images/-/wikis/uploads/2aba126b6ddb1c4c37d4be11d125c1c6/srlinux-asymmetric-5.png)
 
-The communication between host h1 and h3 follows a similar pattern - the packet is received in macvrf1, mapped VNI 10010, and since the destination MAC address is the anycast MAC address owned by leaf1, it is then routed locally into VNI 10020 (since `irb0.20` is locally attached) and then bridged across to the destination, as confirmed below:
+The communication between server s1 and s3 follows a similar pattern - the packet is received in macvrf1, mapped VNI 10010, and since the destination MAC address is the anycast MAC address owned by leaf1, it is then routed locally into VNI 10020 (since `irb0.20` is locally attached) and then bridged across to the destination, as confirmed below:
 
 ```
 --{ + running }--[  ]--
