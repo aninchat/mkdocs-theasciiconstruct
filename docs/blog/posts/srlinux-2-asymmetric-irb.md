@@ -88,48 +88,48 @@ topology:
 And the interface configuration for the hosts is as follows:
 
 === "h1"
-```
-auto lo
-iface lo inet loopback
+    ```
+    auto lo
+    iface lo inet loopback
 
-auto eth1
-iface eth1 inet static
-    address 172.16.10.1
-    netmask 255.255.255.0
-```
+    auto eth1
+    iface eth1 inet static
+        address 172.16.10.1
+        netmask 255.255.255.0
+    ```
 === "h2"
-```
-auto lo
-iface lo inet loopback
+    ```
+    auto lo
+    iface lo inet loopback
 
-auto eth1
-iface eth1 inet static
+    auto eth1
+    iface eth1 inet static
 
-auto eth2
-iface eth1 inet static
+    auto eth2
+    iface eth1 inet static
 
-auto bond
-iface bond inet static
-  address 172.16.10.2
-  netmask 255.255.255.0
-  mtu 9000
-  bond-slaves eth1 eth2
-  bond-mode 802.3ad
-  bond-miimon 100
-  bond-lacp-rate 1
-  bond-min-links 1
-  bond-xmit-hash-policy layer3+4
-```
-=== "h3"
-```
-auto lo
-iface lo inet loopback
-
-auto eth1
-iface eth1 inet static
-    address 172.16.20.3
+    auto bond
+    iface bond inet static
+    address 172.16.10.2
     netmask 255.255.255.0
-```
+    mtu 9000
+    bond-slaves eth1 eth2
+    bond-mode 802.3ad
+    bond-miimon 100
+    bond-lacp-rate 1
+    bond-min-links 1
+    bond-xmit-hash-policy layer3+4
+    ```
+=== "h3"
+    ```
+    auto lo
+    iface lo inet loopback
+
+    auto eth1
+    iface eth1 inet static
+        address 172.16.20.3
+        netmask 255.255.255.0
+    ```
 
 The end goal of this post is to ensure that host h1 can communicate with both h2 (same subnet) and h3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):
 
