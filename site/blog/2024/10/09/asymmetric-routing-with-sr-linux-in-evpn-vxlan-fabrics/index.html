@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1443,9 +1443,9 @@
 
 
 <h1 id="asymmetric-routing-with-sr-linux-in-evpn-vxlan-fabrics">Asymmetric routing with SR Linux in EVPN VXLAN fabrics</h1>
-<p>This post dives deeper into the asymmetric routing model on SR Linux. The topology in use is a 3-stage Clos fabric with BGP EVPN and VXLAN, with host h1 single-homed to leaf1, h2 dual-homed to leaf2 and leaf3 and h3 single-homed to leaf4. Hosts h1 and h2 are in the same subnet, 172.16.10.0/24 while h3 is in a different subnet, 172.16.20.0/24. Thus, this post demonstrates Layer 2 extension over a routed fabric as well as how Layer 3 services are deployed over the same fabric, with an asymmetric routing model. </p>
+<p>This post dives deeper into the asymmetric routing model on SR Linux. The topology in use is a 3-stage Clos fabric with BGP EVPN and VXLAN, with server s1 single-homed to leaf1, s2 dual-homed to leaf2 and leaf3 and s3 single-homed to leaf4. Hosts s1 and s2 are in the same subnet, 172.16.10.0/24 while s3 is in a different subnet, 172.16.20.0/24. Thus, this post demonstrates Layer 2 extension over a routed fabric as well as how Layer 3 services are deployed over the same fabric, with an asymmetric routing model. </p>
 <p>The physical topology is shown below:</p>
-<p><img src = "https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png"></p>
+<p><img alt="srlinux-asymm-1" src="https://gitlab.com/aninchat1/images/-/wikis/uploads/1d3750d935d534973fc913e3a3a68c49/srlinux-asymmetric-1.png" /></p>
 <!-- more -->
 
 <p>The Containerlab file used for this is shown below:</p>
@@ -1455,29 +1455,29 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  nodes:
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    spine1:
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      kind: nokia_srlinux
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      image: ghcr.io/nokia/srlinux
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      image: ghcr.io/nokia/srlinux:24.7.1
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    spine2:
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      kind: nokia_srlinux
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      image: ghcr.io/nokia/srlinux
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      image: ghcr.io/nokia/srlinux:24.7.1
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    leaf1:
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      kind: nokia_srlinux
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      image: ghcr.io/nokia/srlinux
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      image: ghcr.io/nokia/srlinux:24.7.1
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    leaf2:
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      kind: nokia_srlinux
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      image: ghcr.io/nokia/srlinux
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      image: ghcr.io/nokia/srlinux:24.7.1
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    leaf3:
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>      kind: nokia_srlinux
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>      image: ghcr.io/nokia/srlinux
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>      image: ghcr.io/nokia/srlinux:24.7.1
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    leaf4:
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>      kind: nokia_srlinux
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>      image: ghcr.io/nokia/srlinux
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    h1:
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>      image: ghcr.io/nokia/srlinux:24.7.1
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    s1:
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>      kind: linux
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>      image: ghcr.io/srl-labs/network-multitool
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>      exec:
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        - ip addr add 172.16.10.1/24 dev eth1
 </span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        - ip route add 172.16.20.0/24 via 172.16.10.254
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    h2:
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    s2:
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>      kind: linux
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>      image: ghcr.io/srl-labs/network-multitool
 </span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>      exec:  
@@ -1491,7 +1491,7 @@
 </span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        - ip link set eth2 up
 </span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        - ip link set bond0 up
 </span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        - ip route add 172.16.20.0/24 via 172.16.10.254
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    h3:
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    s3:
 </span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>      kind: linux
 </span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>      image: ghcr.io/srl-labs/network-multitool
 </span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>      exec:
@@ -1506,16 +1506,16 @@
 </span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    - endpoints: [&quot;leaf3:e1-2&quot;, &quot;spine2:e1-3&quot;]
 </span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    - endpoints: [&quot;leaf4:e1-1&quot;, &quot;spine1:e1-4&quot;]
 </span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    - endpoints: [&quot;leaf4:e1-2&quot;, &quot;spine2:e1-4&quot;]
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    - endpoints: [&quot;leaf1:e1-3&quot;, &quot;h1:eth1&quot;]
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    - endpoints: [&quot;leaf2:e1-3&quot;, &quot;h2:eth1&quot;]
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    - endpoints: [&quot;leaf3:e1-3&quot;, &quot;h2:eth2&quot;]
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    - endpoints: [&quot;leaf4:e1-3&quot;, &quot;h3:eth1&quot;]
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    - endpoints: [&quot;leaf1:e1-3&quot;, &quot;s1:eth1&quot;]
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    - endpoints: [&quot;leaf2:e1-3&quot;, &quot;s2:eth1&quot;]
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    - endpoints: [&quot;leaf3:e1-3&quot;, &quot;s3:eth2&quot;]
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    - endpoints: [&quot;leaf4:e1-3&quot;, &quot;s3:eth1&quot;]
 </span></code></pre></div>
 <details class="note" open="open">
 <summary>Note</summary>
-<p>The host (image used is <code>ghcr.io/srl-labs/network-multitool</code>) login credentials are user/multit00l.</p>
+<p>The server/host (image used is <code>ghcr.io/srl-labs/network-multitool</code>) login credentials is <code>user/multit00l</code>.</p>
 </details>
-<p>The end goal of this post is to ensure that host h1 can communicate with both h2 (same subnet) and h3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):</p>
+<p>The end goal of this post is to ensure that host s1 can communicate with both s2 (same subnet) and s3 (different subnet) using an asymmetric routing model. To that end, the following IPv4 addressing is used (with the IRB addressing following a distributed, anycast model):</p>
 <table>
 <thead>
 <tr>
@@ -1541,15 +1541,15 @@
 <td style="text-align: center;">172.16.20.0/24</td>
 </tr>
 <tr>
-<td style="text-align: center;">host h1</td>
+<td style="text-align: center;">server s1</td>
 <td style="text-align: center;">172.16.10.1/24</td>
 </tr>
 <tr>
-<td style="text-align: center;">host h2</td>
+<td style="text-align: center;">server s2</td>
 <td style="text-align: center;">172.16.10.2/24</td>
 </tr>
 <tr>
-<td style="text-align: center;">host h3</td>
+<td style="text-align: center;">server s3</td>
 <td style="text-align: center;">172.16.20.3/24</td>
 </tr>
 <tr>
@@ -1563,7 +1563,7 @@
 </tbody>
 </table>
 <h2 id="reviewing-the-asymmetric-routing-model">Reviewing the asymmetric routing model</h2>
-<p>When routing between VNIs, in a VXLAN fabric, there are two major routing models that can be used - asymmetric and symmetric. Asymmetric routing, which is the focus of this post, uses a <em><code>bridge-route-bridge</code></em> model, implying that the ingress leaf bridges the packet into the Layer 2 domain, routes it from one VLAN/VNI to another and then bridges the packet across the VXLAN fabric to the destination. </p>
+<p>When routing between VNIs, in a VXLAN fabric, there are two major routing models that can be used - asymmetric and symmetric. Asymmetric routing, which is the focus of this post, uses a <em><code>bridge-route-bridge</code></em> model, implying that the ingress leaf bridges the packet into the Layer 2 domain, routes it from one VLAN/VNI to another and then bridges the packet across the VXLAN fabric to the destination. The <em>asymmetry</em> is in the the number of lookups needed on the ingress and the egress leafs - on the ingress leaf, a MAC lookup, an IP lookup and then another MAC lookup is performed while on the egress leaf, only a MAC lookup is performed.</p>
 <p>Such a design naturally implies that both the source and the destination IRBs (and the corresponding Layer 2 domains and bridge tables) must exist on all leafs hosting servers that need to communicate with each other. While this increases the operational state on the leafs themselves (ARP state and MAC address state is stored everywhere), it does offer configuration and operational simplicity.</p>
 <p><img alt="srlinux-asymm-2" src="https://gitlab.com/aninchat1/images/-/wikis/uploads/f93957318e62633db1c8603dbef57b69/srlinux-asymmetric-2.png" /></p>
 <h2 id="configuration-walkthrough">Configuration walkthrough</h2>
@@ -2243,7 +2243,7 @@
 <p>Similar to how ranges can be used to pull configuration state from multiple interfaces as an example, in this case a wildcard <code>*</code> is used to select multiple routing-policies. The wildcard <code>spine-*</code> matches both policies named <code>spine-import</code> and <code>spine-export</code>.</p>
 </details>
 <h3 id="host-connectivity-and-esi-lag">Host connectivity and ESI LAG</h3>
-<p>With BGP configured, we can start to deploy the connectivity to the servers and configure the necessary VXLAN constructs for end-to-end connectivity. The interfaces, to the servers, are configured as untagged interfaces. Since host h2 is multi-homed to leaf2 and leaf3, this segment is configured as an ESI LAG. This includes:</p>
+<p>With BGP configured, we can start to deploy the connectivity to the servers and configure the necessary VXLAN constructs for end-to-end connectivity. The interfaces, to the servers, are configured as untagged interfaces. Since server s2 is multi-homed to leaf2 and leaf3, this segment is configured as an ESI LAG. This includes:</p>
 <ol>
 <li>Mapping the physical interface to a LAG interface (<code>lag1</code>, in this case).</li>
 <li>The LAG interface configured with the required LACP properties - mode <code>active</code> and a system-mac of <code>00:00:00:00:23:23</code>. This LAG interface is also configured with a subinterface of type <code>bridged</code>.</li>
@@ -2390,7 +2390,7 @@
 </div>
 </div>
 <h3 id="vxlan-tunnel-interfaces">VXLAN tunnel interfaces</h3>
-<p>On each leaf, VXLAN tunnel-interfaces are created next. In this case, two logical interfaces are created, one for VNI 10010 and another for VNI 10020 (since this is asymmetric routing, all VNIs must exist on all leafs that want to route between the respective VNIs). Since the end-goal is to have host h1 communicate with h2 and h3, only leaf1 and leaf4 are configured with VNI 10020 as well, while leaf2 and leaf3 are only configured with VNI 10010. </p>
+<p>On each leaf, VXLAN tunnel-interfaces are created next. In this case, two logical interfaces are created, one for VNI 10010 and another for VNI 10020 (since this is asymmetric routing, all VNIs must exist on all leafs that want to route between the respective VNIs). Since the end-goal is to have server s1 communicate with s2 and s3, only leaf1 and leaf4 are configured with VNI 10020 as well, while leaf2 and leaf3 are only configured with VNI 10010. </p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:4"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">leaf1</label><label for="__tabbed_5_2">leaf2</label><label for="__tabbed_5_3">leaf3</label><label for="__tabbed_5_4">leaf4</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2904,7 +2904,7 @@
 <p>This completes the configuration walkthrough section of this post. Next, we'll cover the control plane and data plane validation.</p>
 <h2 id="control-plane-data-plane-validation">Control plane &amp; data plane validation</h2>
 <p>When the hosts come online, they typically send a GARP to ensure there is no duplicate IP address in their broadcast domain. This enables the locally attached leafs to learn the IP-to-MAC binding and build an ARP entry in the ARP cache table (since the <code>arp learn-unsolicited</code> configuration option is set to <code>true</code>). This, in turn, is advertised as an EVPN Type-2 MAC+IP route for remote leafs to learn this as well and eventually insert the IP-to-MAC binding as an entry in their ARP caches. </p>
-<p>On leaf1, we can confirm that it has learnt the IP-to-MAC binding for host h1 (locally attached) and h3 (attached to remote leaf, leaf4). </p>
+<p>On leaf1, we can confirm that it has learnt the IP-to-MAC binding for server s1 (locally attached) and s3 (attached to remote leaf, leaf4). </p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>A:leaf1# show arpnd arp-entries interface irb0
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>+-------------------+-------------------+-----------------+-------------------+-------------------------------------+------------------------------------------------------------------------+
 </span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>|     Interface     |   Subinterface    |    Neighbor     |      Origin       |         Link layer address          |                                 Expiry                                 |
@@ -2918,7 +2918,7 @@
 </span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 </span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>--{ + candidate shared default }--[  ]--
 </span></code></pre></div>
-<p>The ARP entry for host h3 (172.16.20.3) is learnt via the EVPN Type-2 MAC+IP route received from leaf4, as shown below.</p>
+<p>The ARP entry for server s3 (172.16.20.3) is learnt via the EVPN Type-2 MAC+IP route received from leaf4, as shown below.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>--{ + running }--[  ]--
 </span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>A:leaf1# show network-instance default protocols bgp routes evpn route-type 2 ip-address 172.16.20.3 detail
 </span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>---------------------------------------------------------------------------------------------------------------------------
@@ -2978,7 +2978,7 @@
 </span><span id="__span-32-57"><a id="__codelineno-32-57" name="__codelineno-32-57" href="#__codelineno-32-57"></a>---------------------------------------------------------------------------------------------------------------------------
 </span><span id="__span-32-58"><a id="__codelineno-32-58" name="__codelineno-32-58" href="#__codelineno-32-58"></a>--{ + running }--[  ]--
 </span></code></pre></div>
-<p>This is an important step for asymmetric routing. Consider a situation where host h1 wants to communicate with h3. When the IP packet hits leaf1, it will attempt to resolve the destination IP address via an ARP request, as it is directly attached locally (via the <code>irb.20</code> interface), as shown below. </p>
+<p>This is an important step for asymmetric routing. Consider a situation where server s1 wants to communicate with s3. When the IP packet hits leaf1, it will attempt to resolve the destination IP address via an ARP request, as it is directly attached locally (via the <code>irb.20</code> interface), as shown below. </p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>--{ + running }--[  ]--
 </span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>A:leaf1# show network-instance default route-table ipv4-unicast prefix 172.16.20.0/24
 </span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3018,10 +3018,10 @@
 <summary>Note</summary>
 <p>The <code>arp host-route populate evpn</code> configuration option is purely a design choice. Since a routing lookup is based on the longest-prefix-match logic (where the longest prefix wins), the existence of the host routes ensure that when there is a routing lookup for the destination, the host route is selected instead of falling back to the subnet route, which relies on ARP resolution, making the forwarding process more efficient. However, this also implies that a host route is created for every EVPN-learnt ARP entry, which can lead to a large routing table, potentially creating an issue in large-scale fabrics.</p>
 </details>
-<p>Let's consider two flows to understand the data plane forwarding in such a design - host h1 communicating with h2 (same subnet) and h1 communicating with h3 (different subnet). </p>
-<p>Since h1 is in the same subnet as h2, when communicating with h2, h1 will try to resolve its IP address directly via an ARP request. This is received on leaf1 and leaked to the CPU via <code>irb0.10</code>. Since L2 proxy-arp is not enabled, the <code>arp_nd_mgr</code> process picks up the ARP request and responds back using its own anycast gateway MAC address while suppressing the ARP request from being flooded in the fabric. A packet capture of this ARP reply is shown below.</p>
+<p>Let's consider two flows to understand the data plane forwarding in such a design - server s1 communicating with s2 (same subnet) and s1 communicating with s3 (different subnet). </p>
+<p>Since s1 is in the same subnet as s2, when communicating with s2, s1 will try to resolve its IP address directly via an ARP request. This is received on leaf1 and leaked to the CPU via <code>irb0.10</code>. Since L2 proxy-arp is not enabled, the <code>arp_nd_mgr</code> process picks up the ARP request and responds back using its own anycast gateway MAC address while suppressing the ARP request from being flooded in the fabric. A packet capture of this ARP reply is shown below.</p>
 <p><img alt="srlinux-asymm-4" src="https://gitlab.com/aninchat1/images/-/wikis/uploads/bc7ebec1d9e45487dead1d77849f09c2/srlinux-asymmetric-4.png" /></p>
-<p>Once this ARP process completes, host h1 generates an ICMP request (since we are testing communication between hosts using the <code>ping</code> tool). When this IP packet arrives on leaf1, it does a routing lookup (since the destination MAC address is owned by itself) and this routing lookup will either hit the 172.16.10.0/24 prefix or the more-specific 172.16.10.2/32 prefix (installed from the ARP entry via the EVPN Type-2 MAC+IP route), as shown below. Since this is a directly attached route, it is further resolved into a MAC address via the ARP table and then the packet is bridged towards the destination. This MAC address points to an Ethernet Segment, which in turn resolves into VTEPs 192.0.2.12 and 192.0.2.13.</p>
+<p>Once this ARP process completes, server s1 generates an ICMP request (since we are testing communication between hosts using the <code>ping</code> tool). When this IP packet arrives on leaf1, it does a routing lookup (since the destination MAC address is owned by itself) and this routing lookup will either hit the 172.16.10.0/24 prefix or the more-specific 172.16.10.2/32 prefix (installed from the ARP entry via the EVPN Type-2 MAC+IP route), as shown below. Since this is a directly attached route, it is further resolved into a MAC address via the ARP table and then the packet is bridged towards the destination. This MAC address points to an Ethernet Segment, which in turn resolves into VTEPs 192.0.2.12 and 192.0.2.13.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>A:leaf1# show network-instance default route-table ipv4-unicast route 172.16.10.2
 </span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 </span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>IPv4 unicast route table of network instance default
@@ -3079,7 +3079,7 @@
 </span></code></pre></div>
 <p>A packet capture of the in-flight packet (as leaf1 sends it to spine1) is shown below, which confirms that the packet ICMP request is VXLAN-encapsulated with a VNI of 10010. It also confirms that because of the L3 proxy-arp approach to suppressing ARPs in an EVPN VXLAN fabric, the source MAC address in the inner Ethernet header is the anycast gateway MAC address.</p>
 <p><img alt="srlinux-asymm-5" src="https://gitlab.com/aninchat1/images/-/wikis/uploads/2aba126b6ddb1c4c37d4be11d125c1c6/srlinux-asymmetric-5.png" /></p>
-<p>The communication between host h1 and h3 follows a similar pattern - the packet is received in macvrf1, mapped VNI 10010, and since the destination MAC address is the anycast MAC address owned by leaf1, it is then routed locally into VNI 10020 (since <code>irb0.20</code> is locally attached) and then bridged across to the destination, as confirmed below:</p>
+<p>The communication between server s1 and s3 follows a similar pattern - the packet is received in macvrf1, mapped VNI 10010, and since the destination MAC address is the anycast MAC address owned by leaf1, it is then routed locally into VNI 10020 (since <code>irb0.20</code> is locally attached) and then bridged across to the destination, as confirmed below:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>--{ + running }--[  ]--
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>A:leaf1# show network-instance default route-table ipv4-unicast route 172.16.20.3
 </span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3211,7 +3211,7 @@
     <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.top", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.path", "search.suggest", "search.highlight", "content.code.annotate", "content.tooltips", "toc.integrate", "navigation.indexes"], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
