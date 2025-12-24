@@ -34,9 +34,7 @@ theme:
     - content.tooltips
     - toc.integrate
     - navigation.indexes
-  font:
-    text: Syne Mono
-    code: Fira Mono
+  font: false
   palette:
     # Palette toggle for light mode
     - scheme: default
