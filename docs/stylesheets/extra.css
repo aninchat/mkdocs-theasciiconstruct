@@ -8,7 +8,7 @@
 @font-face {
   font-family: "Syne Mono";
   src: url("../assets/fonts/SyneMono-Regular.woff2") format("woff2");
-  font-weight: 300;
+  font-weight: 400; /* Syne Mono is typically single-weight */
   font-style: normal;
   font-display: swap;
 }
@@ -17,16 +17,16 @@
 @font-face {
   font-family: "Fira Mono";
   src: url("../assets/fonts/FiraMono-Regular.woff2") format("woff2");
-  font-weight: 200;
+  font-weight: 400; /* Fira Mono is typically single-weight */
   font-style: normal;
   font-display: swap;
 }
 
-/* Body text (recommended for readability) */
+/* Body text (readable) */
 @font-face {
   font-family: "Inter";
   src: url("../assets/fonts/Inter-VariableFont.woff2") format("woff2");
-  font-weight: 100 600;
+  font-weight: 100 900; /* full variable range */
   font-style: normal;
   font-display: swap;
 }
@@ -71,12 +71,19 @@
 }
 
 /* =========================
-   Typography (readability)
+   Typography (tighter + readable)
    ========================= */
 
 .md-typeset {
-  line-height: 1.6;
-  font-size: 0.95rem; /* good long-form baseline */
+  font-size: 0.90rem;
+  line-height: 1.45;
+}
+
+/* Reduce vertical gaps between blocks (this is the "too much gap" culprit) */
+.md-typeset p,
+.md-typeset ul,
+.md-typeset ol {
+  margin: 0.55em 0;
 }
 
 /* Keep headings on your brand font */
@@ -85,6 +92,11 @@
 .md-typeset h3 {
   font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+/* Optional: slightly tighter heading spacing */
+.md-typeset h1 { margin: 0.6em 0 0.35em; }
+.md-typeset h2 { margin: 0.8em 0 0.35em; }
+.md-typeset h3 { margin: 0.9em 0 0.35em; }
 
 /* Code/config blocks: readable, not cramped */
 .md-typeset pre code {
