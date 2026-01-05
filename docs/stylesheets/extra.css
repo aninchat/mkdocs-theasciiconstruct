@@ -4,32 +4,44 @@
    docs/assets/fonts/
    ========================= */
 
+/* Brand / headings */
 @font-face {
   font-family: "Syne Mono";
-  src:
-    url("/assets/fonts/SyneMono-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/SyneMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+/* Code / config examples */
 @font-face {
   font-family: "Fira Mono";
-  src:
-    url("/assets/fonts/FiraMono-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/FiraMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-/* Optional: tell Material which fonts to use globally */
-:root {
-  --md-text-font: "Fira Mono";
-  --md-code-font: "Fira Mono";
+/* Body text (recommended for readability) */
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-VariableFont.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* =========================
-   Your custom styles
+   Material global font wiring
+   ========================= */
+
+:root {
+  --md-text-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --md-code-font: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+/* =========================
+   Layout / header / tabs
    ========================= */
 
 .md-grid {
@@ -58,20 +70,54 @@
   padding-right: 1.5em;
 }
 
-/* font size and family for text in body */
+/* =========================
+   Typography (readability)
+   ========================= */
+
 .md-typeset {
-  font-family: "Fira Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  line-height: 1.2;
-  font-size: 0.7rem;
+  line-height: 1.6;
+  font-size: 0.95rem; /* good long-form baseline */
 }
 
-/* font family for h1 and h2 headers */
+/* Keep headings on your brand font */
 .md-typeset h1,
-.md-typeset h2 {
+.md-typeset h2,
+.md-typeset h3 {
   font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/* control image sizing */
+/* Code/config blocks: readable, not cramped */
+.md-typeset pre code {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Make long configs scroll horizontally instead of wrapping */
+.md-typeset pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 0.6rem;
+}
+
+/* Inline code: slightly smaller than body */
+.md-typeset code {
+  font-size: 0.90em;
+}
+
+/* =========================
+   Images: consistent sizing
+   ========================= */
+
+/* Full post pages: cap image width so it’s not too big */
 .md-typeset img {
-  max-width: 85%;
+  display: block;
+  margin: 0.8rem auto;
+  height: auto;
+  max-width: min(100%, 860px);
+}
+
+/* Blog index/excerpts: keep images smaller so listings look tidy */
+.md-post--excerpt img,
+.md-blog .md-typeset img {
+  max-width: min(100%, 520px);
 }

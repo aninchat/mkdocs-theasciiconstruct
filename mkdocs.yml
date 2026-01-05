@@ -31,6 +31,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.annotate
+    - content.code.copy
     - content.tooltips
     - toc.integrate
     - navigation.indexes
@@ -84,7 +85,6 @@ nav:
   - "Learning labs":
       - labs/index.md
 markdown_extensions:
-  - markdown.extensions.admonition
   - attr_list
   - tables
   - def_list
