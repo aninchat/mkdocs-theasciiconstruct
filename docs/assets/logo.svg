@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <!-- Navy background -->
+  <rect width="40" height="40" rx="6" fill="#1a2744"/>
+  <!-- > chevron (terminal prompt) in gold -->
+  <polyline
+    points="7,10 19,20 7,30"
+    fill="none"
+    stroke="#f5c518"
+    stroke-width="3.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- _ cursor in gold -->
+  <line
+    x1="22" y1="30"
+    x2="34" y2="30"
+    stroke="#f5c518"
+    stroke-width="3.5"
+    stroke-linecap="round"
+  />
+</svg>

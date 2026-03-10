@@ -21,7 +21,8 @@ theme:
       example: fontawesome/solid/flask
       tip: fontawesome/solid/bullhorn
   custom_dir: overrides
-  logo: assets/dbc_3334.png
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
   features:
     - navigation.top
     - navigation.instant
@@ -42,8 +43,8 @@ theme:
       # toggle:
       #   icon: material/weather-night
       #   name: Switch to dark mode
-      primary: white
-      accent: cyan
+      primary: black
+      accent: indigo
 
     # # Palette toggle for dark mode
     # - scheme: slate
@@ -86,6 +87,7 @@ nav:
       - labs/index.md
 markdown_extensions:
   - attr_list
+  - md_in_html
   - tables
   - def_list
   - admonition

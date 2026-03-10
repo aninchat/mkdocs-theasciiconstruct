@@ -4,11 +4,11 @@
    docs/assets/fonts/
    ========================= */
 
-/* Brand / headings */
+/* Headings (serif, editorial) */
 @font-face {
-  font-family: "Syne Mono";
-  src: url("../assets/fonts/SyneMono-Regular.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-VariableFont.woff2") format("woff2");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -50,14 +50,18 @@
 
 .md-header__title {
   flex-grow: 1;
-  font-size: 1.35rem;   /* slightly smaller */
-  height: 3.1rem;
-  line-height: 3.1rem;
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1.1rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.md-header {
+  height: 2.2rem;
 }
 
 .md-tabs {
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 .md-tabs__list {
@@ -89,6 +93,25 @@
   margin: 0.35em 0;
 }
 
+/* Exclude admonition titles from global p margin reduction */
+/* Make title a flex row so icon and text always centre-align */
+.md-typeset .admonition-title,
+.md-typeset details > summary {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem;
+}
+
+/* ::before becomes a flex item — remove its inline vertical-align offset */
+.md-typeset .admonition-title::before,
+.md-typeset details > summary::before {
+  flex-shrink: 0;
+  margin-right: 0 !important;
+  vertical-align: unset !important;
+}
+
 /* Lists: reduce indentation slightly */
 .md-typeset ul,
 .md-typeset ol {
@@ -97,21 +120,24 @@
 
 /* Headings: compact, not huge */
 .md-typeset h1 {
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 700;
   font-size: 1.35rem;
   margin: 0.55em 0 0.30em;
   line-height: 1.18;
 }
 
 .md-typeset h2 {
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 700;
   font-size: 1.15rem;
   margin: 0.65em 0 0.30em;
   line-height: 1.20;
 }
 
 .md-typeset h3 {
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 600;
   font-size: 1.00rem;
   margin: 0.75em 0 0.30em;
   line-height: 1.22;
@@ -124,7 +150,7 @@
 
 /* Code blocks: slightly larger than body (so configs stay readable) */
 .md-typeset pre code {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   line-height: 1.35;
 }
 
@@ -133,6 +159,43 @@
   overflow-x: auto;
   padding: 0.85rem;
   border-radius: 0.6rem;
+}
+
+/* =========================
+   Homepage cards
+   ========================= */
+
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pin "Read post" link to bottom of every card */
+.md-typeset .grid.cards > ul > li > p:last-of-type,
+.md-typeset .grid.cards > ol > li > p:last-of-type {
+  margin-top: auto;
+  padding-top: 0.5em;
+}
+
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ol > li:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+/* Inline tag chips inside cards (backtick text) */
+.md-typeset .grid.cards code {
+  background: var(--md-default-fg-color--lightest);
+  border-radius: 2rem;
+  padding: 0.1em 0.55em;
+  font-size: 0.72rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: var(--md-default-fg-color--light);
+  letter-spacing: 0.01em;
 }
 
 /* =========================
@@ -151,4 +214,110 @@
 .md-post--excerpt img,
 .md-blog .md-typeset img {
   max-width: min(100%, 520px);
+}
+
+/* Author avatar: restore inline layout (don't let global img rule break it) */
+.md-author img {
+  display: inline;
+  margin: 0;
+  max-width: none;
+  height: 100%;
+}
+
+/* =========================
+   Color scheme
+   ========================= */
+
+/* Header: deep navy */
+.md-header {
+  background-color: #1a2744;
+}
+
+/* Tabs: match header */
+.md-tabs {
+  background-color: #1a2744;
+}
+
+/* Active / hovered tab: gold */
+.md-tabs__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: #f5c518;
+}
+
+/* Announcement bar: forest green */
+.md-announce {
+  background-color: #1d5c3e;
+  color: #ffffff;
+}
+.md-announce a {
+  color: #f5c518 !important;
+}
+
+/* Links: dark amber */
+.md-typeset a {
+  color: #8a6200;
+}
+.md-typeset a:hover {
+  color: #1d5c3e;
+}
+
+/* Code blocks: light background, dark text */
+.md-typeset pre {
+  background-color: #f5f6f8;
+}
+.md-typeset pre code {
+  color: #111827;
+}
+
+/* =========================
+   Homepage: Courier New font
+   ========================= */
+
+/* Scope to homepage wrapper only */
+.home-page h2 {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.home-page h1 {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #111827;
+}
+
+/* Intro paragraphs: Inter, very dark */
+.home-page > p {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #111827;
+}
+
+/* Homepage h1: larger and prominent */
+.home-page h1 {
+  font-size: 1.65rem;
+  letter-spacing: -0.01em;
+}
+
+/* Featured Posts heading */
+.home-page h2 {
+  font-size: 1.0rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-weight: 400;
+  margin-bottom: 1.0em;
+}
+
+/* Cards remain Inter — reset everything inside */
+.home-page .grid.cards * {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* View all posts link: keep Inter + amber */
+.home-page > p:last-child a {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #8a6200;
+}
+.home-page > p:last-child a:hover {
+  color: #1d5c3e;
 }
