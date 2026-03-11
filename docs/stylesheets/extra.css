@@ -205,12 +205,12 @@
    Images: consistent sizing
    ========================= */
 
-/* Full pages: cap image width so it’s not too big */
+/* Full pages: fixed 700px, left-aligned */
 .md-typeset img {
   display: block;
-  margin: 0.7rem auto;
+  margin: 0.7rem 0;
   height: auto;
-  max-width: min(100%, 860px);
+  width: min(100%, 700px);
 }
 
 /* Blog index/excerpts: keep images smaller so listings look tidy */
