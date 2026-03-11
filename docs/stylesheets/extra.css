@@ -120,27 +120,30 @@
 
 /* Headings: compact, not huge */
 .md-typeset h1 {
-  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-weight: 700;
   font-size: 1.35rem;
   margin: 0.55em 0 0.30em;
   line-height: 1.18;
+  color: #111827;
 }
 
 .md-typeset h2 {
-  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-weight: 700;
   font-size: 1.15rem;
   margin: 0.65em 0 0.30em;
   line-height: 1.20;
+  color: #111827;
 }
 
 .md-typeset h3 {
-  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-weight: 600;
   font-size: 1.00rem;
   margin: 0.75em 0 0.30em;
   line-height: 1.22;
+  color: #111827;
 }
 
 /* Inline code: keep tight and consistent */
