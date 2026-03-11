@@ -273,6 +273,84 @@
 }
 
 /* =========================
+   Homepage: intro + book covers
+   ========================= */
+
+.intro-section {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.intro-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Intro paragraphs inside .intro-text */
+.intro-text p {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: #111827;
+}
+
+.books-section {
+  display: flex;
+  gap: 1.2rem;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none !important;
+  width: 140px;
+}
+
+.book-card img {
+  display: block !important;
+  margin: 0 !important;
+  width: 130px !important;
+  max-width: 130px !important;
+  height: 180px !important;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:hover img {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.24);
+}
+
+.book-title {
+  display: block;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 0.5em;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.book-buy {
+  display: block;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.68rem;
+  color: #8a6200;
+  margin-top: 0.4em;
+}
+
+.book-card:hover .book-buy {
+  color: #1d5c3e;
+}
+
+/* =========================
    Homepage: Courier New font
    ========================= */
 
@@ -281,21 +359,20 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.home-page h1 {
+.home-page h1,
+.intro-text h1 {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   color: #111827;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* Intro paragraphs: Inter, very dark */
-.home-page > p {
+.home-page > p,
+.intro-text p {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   color: #111827;
-}
-
-/* Homepage h1: larger and prominent */
-.home-page h1 {
-  font-size: 1.65rem;
-  letter-spacing: -0.01em;
 }
 
 /* Featured Posts heading */

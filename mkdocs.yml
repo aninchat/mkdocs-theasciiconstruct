@@ -36,6 +36,7 @@ theme:
     - content.tooltips
     - toc.integrate
     - navigation.indexes
+    - navigation.expand
   font: false
   palette:
     # Palette toggle for light mode
